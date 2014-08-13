@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="product" content="IkeMed">
+    <meta name="description" content="Controle de consultorio médico/odontológico">
+    <meta name="author" content="Leandro Barral">
+
+    <title>@ViewBag.Title - IkeMed (v0.1)</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="metro">
+    @Html.Partial("_Header")
+    <div class="container">
+        <div class="grid fluid">
+            <div class="row" style="margin-top:0;">
+                <div class="span9">
+                    <h1>
+                        <a href="@ViewBag.BackLink"><i class="icon-arrow-left-3 fg-darker smaller"></i></a>
+                        @ViewBag.PageTitle<small class="on-right">@ViewBag.PageSmallTitle</small>
+                    </h1>
+                </div>
+                <div class="span3">
+                    @Html.Partial("_Sidebar")
+                </div>
+            </div>
+            <div class="row" style="margin-top:0;">
+                <div class="span12">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_Footer")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/metro")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

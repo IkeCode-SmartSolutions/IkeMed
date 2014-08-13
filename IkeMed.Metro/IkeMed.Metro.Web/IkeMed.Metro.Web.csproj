@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7E4BBC30-6BA4-4A79-BB5A-446622D71599}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IkeMed.Metro.Web</RootNamespace>
+    <AssemblyName>IkeMed.Metro.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Base\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\common.css" />
+    <Content Include="css\iconFont.min.css" />
+    <Content Include="css\metro-bootstrap-responsive.css" />
+    <Content Include="css\metro-bootstrap-responsive.min.css" />
+    <Content Include="css\metro-bootstrap.css" />
+    <Content Include="css\metro-bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\iconFont.dev.svg" />
+    <Content Include="fonts\iconFont.svg" />
+    <Content Include="fonts\metroSysIcons.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="js\holder.js" />
+    <Content Include="js\jquery.mousewheel.js" />
+    <Content Include="js\jquery.widget.min.js" />
+    <Content Include="js\metro.docs.js" />
+    <Content Include="js\metro.min.js" />
+    <Content Include="js\metro\metro-accordion.js" />
+    <Content Include="js\metro\metro-button-set.js" />
+    <Content Include="js\metro\metro-calendar.js" />
+    <Content Include="js\metro\metro-carousel.js" />
+    <Content Include="js\metro\metro-core.js" />
+    <Content Include="js\metro\metro-countdown.js" />
+    <Content Include="js\metro\metro-date-format.js" />
+    <Content Include="js\metro\metro-datepicker.js" />
+    <Content Include="js\metro\metro-dialog.js" />
+    <Content Include="js\metro\metro-drag-tile.js" />
+    <Content Include="js\metro\metro-dropdown.js" />
+    <Content Include="js\metro\metro-fluentmenu.js" />
+    <Content Include="js\metro\metro-global.js" />
+    <Content Include="js\metro\metro-hint.js" />
+    <Content Include="js\metro\metro-initiator.js" />
+    <Content Include="js\metro\metro-input-control.js" />
+    <Content Include="js\metro\metro-listview.js" />
+    <Content Include="js\metro\metro-live-tile.js" />
+    <Content Include="js\metro\metro-loader.js" />
+    <Content Include="js\metro\metro-locale.js" />
+    <Content Include="js\metro\metro-notify.js" />
+    <Content Include="js\metro\metro-panel.js" />
+    <Content Include="js\metro\metro-plugin-template.js" />
+    <Content Include="js\metro\metro-progressbar.js" />
+    <Content Include="js\metro\metro-pull.js" />
+    <Content Include="js\metro\metro-rating.js" />
+    <Content Include="js\metro\metro-scroll.js" />
+    <Content Include="js\metro\metro-slider.js" />
+    <Content Include="js\metro\metro-stepper.js" />
+    <Content Include="js\metro\metro-streamer.js" />
+    <Content Include="js\metro\metro-tab-control.js" />
+    <Content Include="js\metro\metro-table.js" />
+    <Content Include="js\metro\metro-tile-transform.js" />
+    <Content Include="js\metro\metro-times.js" />
+    <Content Include="js\metro\metro-touch-handler.js" />
+    <Content Include="js\metro\metro-treeview.js" />
+    <Content Include="js\metro\metro-wizard.js" />
+    <Content Include="js\prettify.js" />
+    <Content Include="less\wizard.less" />
+    <Content Include="less\window.less" />
+    <Content Include="less\variables.less" />
+    <Content Include="less\utils.less" />
+    <Content Include="less\typography.less" />
+    <Content Include="less\treeview.less" />
+    <Content Include="less\transform.less" />
+    <Content Include="less\tiles.less" />
+    <Content Include="less\tables.less" />
+    <Content Include="less\tab-control.less" />
+    <Content Include="less\streamer.less" />
+    <Content Include="less\stepper.less" />
+    <Content Include="less\slider.less" />
+    <Content Include="less\sidebar.less" />
+    <Content Include="less\scroll.less" />
+    <Content Include="less\reset.less" />
+    <Content Include="less\rating.less" />
+    <Content Include="less\progress-bar.less" />
+    <Content Include="less\panels.less" />
+    <Content Include="less\pagination.less" />
+    <Content Include="less\notify.less" />
+    <Content Include="less\notice.less" />
+    <Content Include="less\navigation-bar.less" />
+    <Content Include="less\misc.less" />
+    <Content Include="less\metro-bootstrap-responsive.less" />
+    <Content Include="less\metro-bootstrap.less" />
+    <Content Include="less\menus.less" />
+    <Content Include="less\lists.less" />
+    <Content Include="less\layout.less" />
+    <Content Include="less\images.less" />
+    <Content Include="less\icons.less" />
+    <Content Include="less\iconFont-content.less" />
+    <Content Include="less\iconFont.less" />
+    <Content Include="less\hint.less" />
+    <Content Include="less\grid.less" />
+    <Content Include="less\funcs.less" />
+    <Content Include="less\forms.less" />
+    <Content Include="less\fluent-menu.less" />
+    <Content Include="less\dataTables.less" />
+    <Content Include="less\countdown.less" />
+    <Content Include="less\colors.less" />
+    <Content Include="less\carousel.less" />
+    <Content Include="less\calendar.less" />
+    <Content Include="less\buttons.less" />
+    <Content Include="less\breadcrumbs.less" />
+    <Content Include="less\balloon.less" />
+    <Content Include="less\accordion.less" />
+    <Content Include="fonts\metroSysIcons.woff" />
+    <Content Include="fonts\metroSysIcons.ttf" />
+    <Content Include="fonts\iconFont.woff" />
+    <Content Include="fonts\iconFont.ttf" />
+    <Content Include="fonts\iconFont.json" />
+    <Content Include="fonts\iconFont.eot" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\modernizr-2.7.2.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59101</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://local.ikemed.com/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
