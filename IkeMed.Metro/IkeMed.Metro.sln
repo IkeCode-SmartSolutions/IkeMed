@@ -12,6 +12,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{387C49
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{CCD5765B-7C0E-4149-A8A6-8B8FF28F0819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IkeMed.Model", "Data\IkeMed.Model\IkeMed.Model.csproj", "{01601C8A-2620-4E46-8F8F-C14453C10C7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8397C4FF-7724-47B2-9DE5-4FFFC729A837}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IkeCode.Core", "Core\IkeCode.Core\IkeCode.Core.csproj", "{2E7DC5E8-7418-4FCC-B85F-DA71DE1FD714}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,8 +30,20 @@ Global
 		{7E4BBC30-6BA4-4A79-BB5A-446622D71599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E4BBC30-6BA4-4A79-BB5A-446622D71599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E4BBC30-6BA4-4A79-BB5A-446622D71599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01601C8A-2620-4E46-8F8F-C14453C10C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01601C8A-2620-4E46-8F8F-C14453C10C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01601C8A-2620-4E46-8F8F-C14453C10C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01601C8A-2620-4E46-8F8F-C14453C10C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E7DC5E8-7418-4FCC-B85F-DA71DE1FD714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E7DC5E8-7418-4FCC-B85F-DA71DE1FD714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E7DC5E8-7418-4FCC-B85F-DA71DE1FD714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E7DC5E8-7418-4FCC-B85F-DA71DE1FD714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{01601C8A-2620-4E46-8F8F-C14453C10C7A} = {CCD5765B-7C0E-4149-A8A6-8B8FF28F0819}
+		{2E7DC5E8-7418-4FCC-B85F-DA71DE1FD714} = {8397C4FF-7724-47B2-9DE5-4FFFC729A837}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace IkeCode.Core.CustomAttributes
+{
+    [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = true)]
+    public class EnumRouteNameAttribute : Attribute
+    {
+        readonly string routeName;
+
+        public EnumRouteNameAttribute(string routeName)
+        {
+            this.routeName = routeName;
+        }
+
+        public string RouteName
+        {
+            get { return routeName; }
+        }
+    }
+
+    public static class EnumRouteNameAttributeHelper
+    {
+        public static T GetEnumRouteNameAttribute<T>(this string attributeRouteName)
+            where T : struct
+        {
+            var type = typeof(T);
+            var memInfo = type.GetMembers(BindingFlags.Public | BindingFlags.Static);
+            T result = default(T);
+
+            memInfo.ToList().ForEach(i =>
+            {
+                if (i.DeclaringType.Name == type.Name)
+                {
+                    var attrs = i.GetCustomAttributes<EnumRouteNameAttribute>(false);
+                    if (attrs.Any(j => j.RouteName == attributeRouteName))
+                    {
+                        result = (T)Enum.Parse(typeof(T), i.Name);
+                    }
+                }
+            });
+
+            return result;
+        }
+    }
+}

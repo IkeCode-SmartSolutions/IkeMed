@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IkeMed.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,14 @@ namespace IkeMed.Metro.Web.Base
 {
     public class BaseController : Controller
     {
+        protected IkeMedContext IkeMedContext;
+
         public BaseController()
         {
             this.SetBackLink(null);
+            this.SetPageTitle("");
+            this.SetPageSmallTitle("");
+            this.IkeMedContext = new IkeMedContext();
         }
 
         #region Header Title
