@@ -31,6 +31,7 @@ namespace IkeMed.Model
         public Person()
             : base()
         {
+
         }
     }
 }

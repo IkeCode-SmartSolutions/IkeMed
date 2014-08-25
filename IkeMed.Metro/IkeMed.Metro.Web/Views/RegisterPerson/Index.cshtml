@@ -1,6 +1,6 @@
 ﻿@model RegisterPersonViewModel
 @{
-    ViewBag.Title = string.Format("Cadastro -> {0}", ViewBag.PageSmallTitle);
+    ViewBag.Title = string.Format("Cadastro -> {0}", Model.PersonType.GetDisplayName<PersonTypeEnum>());
     var doctor = Model.Person.Doctor ?? new IkeMed.Model.Doctor();
 }
 <style>
@@ -35,7 +35,7 @@
         <div class="row">
             <div class="span12">
                 <div class="panel" data-role="panel">
-                    <div class="panel-header bg-darkBlue fg-white">
+                    <div class="panel-header bg-dark fg-white">
                         Médico
                     </div>
                     <div class="panel-content" style="display: block;">

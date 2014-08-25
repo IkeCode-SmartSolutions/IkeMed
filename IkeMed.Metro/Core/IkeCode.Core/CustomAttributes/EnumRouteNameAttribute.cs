@@ -29,20 +29,56 @@ namespace IkeCode.Core.CustomAttributes
             where T : struct
         {
             var type = typeof(T);
+
+            if (type.IsEnum)
+                throw new InvalidOperationException(string.Format("Type {0} is not enum.", typeof(T).FullName)); 
+            
             var memInfo = type.GetMembers(BindingFlags.Public | BindingFlags.Static);
             T result = default(T);
 
-            memInfo.ToList().ForEach(i =>
+            if (memInfo != null)
             {
-                if (i.DeclaringType.Name == type.Name)
+                memInfo.ToList().ForEach(i =>
                 {
-                    var attrs = i.GetCustomAttributes<EnumRouteNameAttribute>(false);
-                    if (attrs.Any(j => j.RouteName == attributeRouteName))
+                    if (i.DeclaringType.Name == type.Name)
                     {
-                        result = (T)Enum.Parse(typeof(T), i.Name);
+                        var attrs = i.GetCustomAttributes<EnumRouteNameAttribute>(false);
+                        if (attrs.Any(j => j.RouteName == attributeRouteName))
+                        {
+                            result = (T)Enum.Parse(typeof(T), i.Name);
+                        }
                     }
-                }
-            });
+                });
+            }
+
+            return result;
+        }
+
+        public static string GetEnumRouteNameAttributeValue<T>(this T enumValue)
+            where T : struct
+        {
+            var type = typeof(T);
+
+            if (type.IsEnum)
+                throw new InvalidOperationException(string.Format("Type {0} is not enum.", typeof(T).FullName)); 
+
+            var memInfo = type.GetMember(enumValue.ToString());            
+            var result = string.Empty;
+
+            if (memInfo != null)
+            {
+                memInfo.ToList().ForEach(i =>
+                {
+                    if (i.DeclaringType.Name == type.Name)
+                    {
+                        var attr = i.GetCustomAttributes<EnumRouteNameAttribute>(false).FirstOrDefault();
+                        if (attr != null)
+                        {
+                            result = attr.RouteName;
+                        }
+                    }
+                });
+            }
 
             return result;
         }

@@ -13,9 +13,9 @@
                         <li>
                             <a href="#" class="dropdown-toggle">Pessoas</a>
                             <ul class="dropdown-menu dark" data-role="dropdown">
-                                <li><a href="#">Paciente</a></li>
-                                <li><a href="#">Médico</a></li>
-                                <li><a href="#">Pessoa Juridica</a></li>
+                                <li><a href="@Url.RouteUrl("RegisterPerson", new { personType = PersonTypeEnum.Natural.GetEnumRouteNameAttributeValue() })">Paciente</a></li>
+                                <li><a href="@Url.RouteUrl("RegisterPerson", new { personType = PersonTypeEnum.Doctor.GetEnumRouteNameAttributeValue() })">Médico</a></li>
+                                <li><a href="@Url.RouteUrl("RegisterPerson", new { personType = PersonTypeEnum.Legal.GetEnumRouteNameAttributeValue() })">Pessoa Juridica</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Procedimentos</a></li>

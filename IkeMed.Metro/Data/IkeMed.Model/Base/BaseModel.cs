@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IkeMed.Model
 {
-    public class BaseModel
+    public partial class BaseModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -26,5 +26,9 @@ namespace IkeMed.Model
             this.LastUpdate = DateTime.Now;
             this.IsActive = true;
         }
+
+        #region Common Methods
+
+        #endregion Common Methods
     }
 }

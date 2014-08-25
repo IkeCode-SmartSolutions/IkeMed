@@ -17,24 +17,27 @@ namespace IkeMed.Metro.Web.Controllers
         public RegisterPersonController()
             : base()
         {
-
         }
 
         public ActionResult Index(string personType, int id = 0)
         {
             PersonTypeEnum type = personType.GetEnumRouteNameAttribute<PersonTypeEnum>();
+            var vm = new RegisterPersonViewModel(type);
 
             base.SetPageTitle("Cadastro");
-            base.SetPageSmallTitle(type.GetDisplayName<PersonTypeEnum>());
-
-            var vm = new RegisterPersonViewModel(type);
+            base.SetPageSmallTitle("Pessoa");
 
             if (id > 0)
             {
                 var person = (from p in base.IkeMedContext.People
-                                 where p.ID == id
-                                 select p).SingleOrDefault();
-                vm.SetPerson(person);
+                              where p.ID == id
+                              select p).FirstOrDefault();
+
+                if (person != null)
+                {
+                    base.SetPageTitle("Editar");
+                    vm.SetPerson(person);
+                }
             }
 
             return View(vm);

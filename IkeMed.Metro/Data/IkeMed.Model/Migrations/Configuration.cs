@@ -6,7 +6,7 @@ namespace IkeMed.Model.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<IkeMedContext>
+    public sealed class Configuration : DbMigrationsConfiguration<IkeMedContext>
     {
         public Configuration()
         {
@@ -15,16 +15,16 @@ namespace IkeMed.Model.Migrations
 
         protected override void Seed(IkeMedContext context)
         {
-            context.DocumentTypes.AddOrUpdate(
-                d => d.Name,
-                new DocumentType()
-                {
-                    Name = "RG"
-                },
-                new DocumentType()
-                {
-                    Name = "CPF"
-                });
+            //context.DocumentTypes.AddOrUpdate(
+            //    d => d.Name,
+            //    new DocumentType()
+            //    {
+            //        Name = "RG"
+            //    },
+            //    new DocumentType()
+            //    {
+            //        Name = "CPF"
+            //    });
 
             var person = new Person
             {
