@@ -1,68 +1,77 @@
 ﻿@model RegisterPersonViewModel
 @{
     ViewBag.Title = string.Format("Cadastro -> {0}", Model.PersonType.GetDisplayName<PersonTypeEnum>());
-    var doctor = Model.Person.Doctor ?? new IkeMed.Model.Doctor();
 }
 <style>
     .errorBlock {
         font-size: smaller;
     }
 </style>
-<form>
+@using (Ajax.BeginForm("Post", "RegisterPerson", new AjaxOptions() { HttpMethod = "post", OnComplete = "registerPerson.saveResult" }))
+{
+    Html.AntiForgeryToken();
     <fieldset>
         <legend>Geral</legend>
 
         <div class="input-control switch" data-role="input-control">
             <label class="inline-block" style="margin-right: 20px">
                 Ativo
-                <input type="checkbox" name="IsActive" checked="checked" data-error-message="Campo obrigatório">
+                <input type="checkbox" id="Person_IsActive" name="Person.IsActive" checked="checked" data-error-message="Campo obrigatório" />
                 <span class="check"></span>
             </label>
         </div>
 
-        <label>Nome</label>
+        @Html.LabelFor(m => m.Person.Name)
         <div class="input-control text size7" data-role="input-control">
-            <input type="text" name="Name" placeholder="obrigatório" data-error-message="Campo obrigatório" value="@Model.Person.Name">
+            @Html.TextBoxFor(m => m.Person.Name, new { placeholder = "obrigatório" })
         </div>
 
-        <label>Email</label>
+        @Html.LabelFor(m => m.Person.Email)
         <div class="input-control text size7" data-role="input-control">
-            <input type="email" name="Email" placeholder="obrigatório" data-error-message="Campo obrigatório" value="@Model.Person.Email">
+            @Html.TextBoxFor(m => m.Person.Email, new { placeholder = "obrigatório" })
         </div>
     </fieldset>
 
-    <div class="grid fluid">
-        <div class="row">
-            <div class="span12">
-                <div class="panel" data-role="panel">
-                    <div class="panel-header bg-dark fg-white">
-                        Médico
-                    </div>
-                    <div class="panel-content" style="display: block;">
-                        <div class="input-control switch" data-role="input-control">
-                            <label class="inline-block" style="margin-right: 20px">
-                                Ativo
-                                <input type="checkbox" name="IsActive" checked="checked" data-error-message="Campo obrigatório">
-                                <span class="check"></span>
-                            </label>
+    if (Model.Person.Doctor != null && Model.Person.Doctor.ID > 0 || Model.PersonType == PersonTypeEnum.Doctor)
+    {
+        <div class="grid fluid">
+            <div class="row">
+                <div class="span12">
+                    <div class="panel" data-role="panel">
+                        <div class="panel-header bg-dark fg-white">
+                            @Html.DisplayNameFor(m => m.Person.Doctor)
                         </div>
+                        <div class="panel-content" style="display: block;">
+                            <div class="input-control switch" data-role="input-control">
+                                <label class="inline-block" style="margin-right: 20px">
+                                    Ativo
+                                    <input type="checkbox" id="Person_Doctor_IsActive" name="Person.Doctor.IsActive" checked="checked" data-error-message="Campo obrigatório">
+                                    <span class="check"></span>
+                                </label>
+                            </div>
 
-                        <label>Data de Admissão</label>
-                        <div class="input-control text size3" data-role="datepicker" data-date="@doctor.AdmissionDate.ToString("yyyy-MM-dd")" data-effect="slide">
-                            <input type="text" name="AdmissionDate" placeholder="obrigatório">
-                            <button class="btn-date"></button>
-                            @Html.Partial("Widgets/_DatePicker")
-                        </div>
+                            @Html.LabelFor(m => m.Person.Doctor.AdmissionDate)
+                            <div class="input-control text size3" data-role="datepicker" data-effect="slide">
+                                @Html.TextBoxFor(m => m.Person.Doctor.AdmissionDate)
+                                <button class="btn-date"></button>
+                                @Html.Partial("Widgets/_DatePicker")
+                            </div>
 
-                        <label>Data de Nascimento</label>
-                        <div class="input-control text size3" data-role="datepicker" data-date="@doctor.AdmissionDate.ToString("yyyy-MM-dd")" data-effect="slide">
-                            <input type="text" name="Birthdate" placeholder="obrigatório">
-                            <button class="btn-date"></button>
-                            @Html.Partial("Widgets/_DatePicker")
+                            @Html.LabelFor(m => m.Person.Doctor.Birthdate)
+                            <div class="input-control text size3" data-role="datepicker" data-effect="slide">
+                                @Html.TextBoxFor(m => m.Person.Doctor.Birthdate)
+                                <button class="btn-date"></button>
+                                @Html.Partial("Widgets/_DatePicker")
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    }
+
+    <input type="submit" value="Salvar" />
+}
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/ViewModels/RegisterPerson.js"></script>
+}

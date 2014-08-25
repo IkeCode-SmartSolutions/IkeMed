@@ -22,9 +22,9 @@
                         @ViewBag.PageTitle<small class="on-right">@ViewBag.PageSmallTitle</small>
                     </h1>
                 </div>
-                <div class="span3">
+                @*<div class="span3">
                     @Html.Partial("_Sidebar")
-                </div>
+                </div>*@
             </div>
             <div class="row" style="margin-top:0;">
                 <div class="span12">
@@ -37,6 +37,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/metro")
+    @Scripts.Render("~/bundles/ikemed")
     @RenderSection("scripts", required: false)
 </body>
 </html>

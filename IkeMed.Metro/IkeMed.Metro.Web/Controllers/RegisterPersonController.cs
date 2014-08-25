@@ -2,6 +2,7 @@
 using IkeCode.Core.CustomAttributes.Helpers;
 using IkeMed.Metro.Web.Base;
 using IkeMed.Metro.Web.ViewModels;
+using IkeMed.Model;
 using IkeMed.Model.Enums;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,16 @@ namespace IkeMed.Metro.Web.Controllers
             }
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public JsonResult Post(Person person)
+        {
+            var success = true;
+
+            var a = person;
+
+            return Json(new { success = success, asd = 123, qwe = "foi" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

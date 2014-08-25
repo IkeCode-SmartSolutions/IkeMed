@@ -12,7 +12,14 @@ namespace IkeMed.Metro.Web
                     "~/Scripts/jquery-{version}.js",
                     "~/js/jquery.mousewheel.js",
                     "~/js/jquery.widget.min.js",
+                    "~/Scripts/jquery.validate.js",
+                    "~/Scripts/jquery.validate.unobtrusive.js",
+                    "~/Scripts/jquery.unobtrusive-ajax.js",
                     "~/Scripts/jquery.ext.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ikemed"));
+                //.Include(
+                //    "~/Scripts/ViewModels/ViewModel.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

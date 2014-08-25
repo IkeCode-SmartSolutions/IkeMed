@@ -11,17 +11,20 @@ namespace IkeMed.Model
 {
     public class Person : BaseModel
     {
-        [Required]
-        [MaxLength(250)]
+        [Required, MaxLength(250), Display(Name="Nome")]
         public string Name { get; set; }
 
-        [Required]
-        [MaxLength(250)]
         [Index("IX_PEOPLE_EMAIL", IsUnique = true)]
+        [Required, MaxLength(250), Display(Name = "Email"), DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Display(Name = "Médico")]
         public virtual Doctor Doctor { get; set; }
+
+        [Display(Name = "Pessoa Física")]
         public virtual LegalPerson LegalPerson { get; set; }
+        
+        [Display(Name = "Pessoa Jurídica")]
         public virtual NaturalPerson NaturalPerson { get; set; }
 
         public virtual ICollection<Address> Addresses { get; set; }

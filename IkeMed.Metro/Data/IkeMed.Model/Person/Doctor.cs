@@ -12,10 +12,13 @@ namespace IkeMed.Model
 {
     public class Doctor : BaseModel
     {
-        [Required]
+        [Required, Display(Name = "Data de Admissão"), DataType(DataType.Date)]
         public DateTime AdmissionDate { get; set; }
-        [Required]
+
+        [Required, Display(Name = "Data de Aniversário"), DataType(DataType.Date)]
         public DateTime Birthdate { get; set; }
+
+        [Display(Name = "Imagem de Perfil")]
         public string ProfileImage { get; set; }
 
         public virtual Person Person { get; set; }

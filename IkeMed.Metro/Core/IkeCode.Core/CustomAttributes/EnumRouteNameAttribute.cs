@@ -29,9 +29,6 @@ namespace IkeCode.Core.CustomAttributes
             where T : struct
         {
             var type = typeof(T);
-
-            if (type.IsEnum)
-                throw new InvalidOperationException(string.Format("Type {0} is not enum.", typeof(T).FullName)); 
             
             var memInfo = type.GetMembers(BindingFlags.Public | BindingFlags.Static);
             T result = default(T);
@@ -58,9 +55,6 @@ namespace IkeCode.Core.CustomAttributes
             where T : struct
         {
             var type = typeof(T);
-
-            if (type.IsEnum)
-                throw new InvalidOperationException(string.Format("Type {0} is not enum.", typeof(T).FullName)); 
 
             var memInfo = type.GetMember(enumValue.ToString());            
             var result = string.Empty;
