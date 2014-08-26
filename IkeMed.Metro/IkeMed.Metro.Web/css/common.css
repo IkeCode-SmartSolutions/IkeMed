@@ -1,12 +1,37 @@
 ﻿.metro footer.fixed-bottom {
-  position: fixed;
-  z-index: 1030;
-  left: 0;
-  bottom: 0;
-  top: auto;
-  width: 100%;
+    position: fixed;
+    z-index: 1030;
+    left: 0;
+    bottom: 0;
+    top: auto;
+    width: 100%;
 }
 
-.metro .grid{
+.metro .grid {
     margin-bottom: 50px;
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.valid {
+    border: 1px solid darkgreen !important;
+}
+
+.input-validation-error {
+    border: 1px dashed darkred !important;
+}
+
+.field-validation-error {
+    color: darkred;
+    font-size: 1.0rem;
+}
+
+.field-validation-valid span {
+    display: none;
 }

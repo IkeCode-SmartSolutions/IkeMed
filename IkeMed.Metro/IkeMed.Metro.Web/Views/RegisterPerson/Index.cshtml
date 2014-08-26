@@ -16,7 +16,7 @@
         <div class="input-control switch" data-role="input-control">
             <label class="inline-block" style="margin-right: 20px">
                 Ativo
-                <input type="checkbox" id="Person_IsActive" name="Person.IsActive" checked="checked" data-error-message="Campo obrigatório" />
+                @Html.CheckBoxFor(m => m.Person.IsActive)
                 <span class="check"></span>
             </label>
         </div>
@@ -24,11 +24,13 @@
         @Html.LabelFor(m => m.Person.Name)
         <div class="input-control text size7" data-role="input-control">
             @Html.TextBoxFor(m => m.Person.Name, new { placeholder = "obrigatório" })
+            @Html.ValidationMessageFor(m => m.Person.Name)
         </div>
 
         @Html.LabelFor(m => m.Person.Email)
         <div class="input-control text size7" data-role="input-control">
             @Html.TextBoxFor(m => m.Person.Email, new { placeholder = "obrigatório" })
+            @Html.ValidationMessageFor(m => m.Person.Email)
         </div>
     </fieldset>
 
@@ -45,23 +47,27 @@
                             <div class="input-control switch" data-role="input-control">
                                 <label class="inline-block" style="margin-right: 20px">
                                     Ativo
-                                    <input type="checkbox" id="Person_Doctor_IsActive" name="Person.Doctor.IsActive" checked="checked" data-error-message="Campo obrigatório">
+                                    @Html.CheckBoxFor(m => m.Person.Doctor.IsActive)
                                     <span class="check"></span>
                                 </label>
                             </div>
 
-                            @Html.LabelFor(m => m.Person.Doctor.AdmissionDate)
-                            <div class="input-control text size3" data-role="datepicker" data-effect="slide">
-                                @Html.TextBoxFor(m => m.Person.Doctor.AdmissionDate)
-                                <button class="btn-date"></button>
-                                @Html.Partial("Widgets/_DatePicker")
-                            </div>
+                            <div data-role-isactive="true">
+                                @Html.LabelFor(m => m.Person.Doctor.AdmissionDate)
+                                <div class="input-control text size4" data-role="datepicker" data-effect="slide">
+                                    @Html.TextBoxFor(m => m.Person.Doctor.AdmissionDate)
+                                    <button class="btn-date"></button>
+                                    @Html.Partial("Widgets/_DatePicker")
+                                    @Html.ValidationMessageFor(m => m.Person.Doctor.AdmissionDate)
+                                </div>
 
-                            @Html.LabelFor(m => m.Person.Doctor.Birthdate)
-                            <div class="input-control text size3" data-role="datepicker" data-effect="slide">
-                                @Html.TextBoxFor(m => m.Person.Doctor.Birthdate)
-                                <button class="btn-date"></button>
-                                @Html.Partial("Widgets/_DatePicker")
+                                @Html.LabelFor(m => m.Person.Doctor.Birthdate)
+                                <div class="input-control text size4" data-role="datepicker" data-effect="slide">
+                                    @Html.TextBoxFor(m => m.Person.Doctor.Birthdate)
+                                    <button class="btn-date"></button>
+                                    @Html.Partial("Widgets/_DatePicker")
+                                    @Html.ValidationMessageFor(m => m.Person.Doctor.Birthdate)
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -70,7 +76,11 @@
         </div>
     }
 
-    <input type="submit" value="Salvar" />
+    <div class="pull-right">
+        <input type="reset" class="button large" value="Limpar" />
+        <input type="reset" class="button large danger" value="Apagar" />
+        <input type="submit" class="button large success" value="Salvar" />        
+    </div>
 }
 @section scripts{
     <script type="text/javascript" src="~/Scripts/ViewModels/RegisterPerson.js"></script>
