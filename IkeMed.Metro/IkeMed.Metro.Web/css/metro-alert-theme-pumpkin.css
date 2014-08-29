@@ -1,0 +1,26 @@
+/* === Back Shade === */
+.ikecode-alert-shade.pumpkin
+{
+	background: rgba(0, 0, 0, 0.5);
+}
+
+/* === Alert, Confirm, Prompt Back === */
+.ikecode-alert-alert.pumpkin
+{
+	background: #d35400;
+	color: #ecf0f1;	
+}
+
+/* === Notification Back === */
+.ikecode-alert-message.pumpkin
+{
+	background: #d35400;
+	color: #ecf0f1;
+	border: 3px solid #e67e22;
+}
+
+/* === Buttons === */
+.ikecode-alert-alert.pumpkin .ikecode-alert-foot button
+{
+	color: #d35400;
+}

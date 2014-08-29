@@ -1,0 +1,145 @@
+.ikecode-alert-shade {
+    display: none;
+    left: 0;
+    top: 0;
+    position: absolute;
+    z-index: 119515;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.ikecode-alert-alert {
+    display: none;
+    left: 0;
+    top: 0;
+    position: fixed;
+    background: #fff;
+    width: 100%;
+    z-index: 304315;
+}
+
+.ikecode-alert-notify {
+    display: block;
+    position: fixed;
+    z-index: 304315;
+}
+
+.ikecode-alert-message {
+    display: none;
+    width: 250px;
+    background: #d35400;
+    color: #ecf0f1;
+    border: 3px solid #e67e22;
+    margin-top: 0;
+    margin-bottom: 2px;
+    clear: both;
+}
+
+.ikecode-alert-notify.br > .ikecode-alert-message,
+.ikecode-alert-notify.bc > .ikecode-alert-message,
+.ikecode-alert-notify.bl > .ikecode-alert-message {
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+
+.ikecode-alert-notify.tc > .ikecode-alert-message,
+.ikecode-alert-notify.bc > .ikecode-alert-message,
+.ikecode-alert-notify.cc > .ikecode-alert-message {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ikecode-alert-notify.br > .ikecode-alert-message,
+.ikecode-alert-notify.tr > .ikecode-alert-message {
+    float: right;
+}
+
+.ikecode-alert-notify.bl > .ikecode-alert-message,
+.ikecode-alert-notify.tl > .ikecode-alert-message {
+    float: left;
+}
+
+.ikecode-alert-wrap {
+    width: 800px;
+    margin: 0 auto;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@media (max-width: 992px) {
+    .ikecode-alert-wrap {
+        width: 100%;
+    }
+}
+
+.ikecode-alert-title {
+    font-family: "Open Sans Bold" !important;
+    font-size: 20px;
+    margin: 0;
+    text-align: left;
+}
+
+.ikecode-alert-message .ikecode-alert-wrap {
+    width: 100%;
+}
+
+.ikecode-alert-message .ikecode-alert-title {
+    line-height: 1em;
+    text-align: left;
+}
+
+.ikecode-alert-content {
+    font-family: "Open Sans" !important;
+    font-size: 15px;
+    text-align: left;
+}
+
+    .ikecode-alert-content iframe,
+    .ikecode-alert-content object,
+    .ikecode-alert-content embed {
+        vertical-align: top;
+    }
+
+.ikecode-alert-message .ikecode-alert-content {
+    text-align: left;
+}
+
+.ikecode-alert-input {
+    margin: 10px 0 0;
+}
+
+    .ikecode-alert-input input {
+        font: 12px Tahoma;
+        color: #444;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 5px 0 #ddd inset;
+        background: #fff;
+        padding: 7px;
+        width: 100%;
+        display: block;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+.ikecode-alert-foot {
+    margin-top: 20px;
+    text-align: right;
+    display: block;
+}
+
+    .ikecode-alert-foot button {
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: bold;
+        padding: 3px 12px;
+        border: 0;
+        background: #d35400;
+        color: #fff;
+        margin: 0 0 0 2px;
+    }
+
+
+.ikecode-custom-button {
+}

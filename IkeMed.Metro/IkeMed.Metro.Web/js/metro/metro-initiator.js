@@ -1,4 +1,5 @@
-(function($){
+(function ($) {
+    $.Metro.currentLocale = 'ptbr';
     /*
      * Init or ReInit components
      * */

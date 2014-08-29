@@ -29,6 +29,7 @@ namespace IkeMed.Metro.Web
             bundles.Add(new ScriptBundle("~/bundles/metro").Include(
                     "~/js/metro.min.js",
                     "~/js/metro/metro-*",
+                    "~/js/ext-plugins/metro-alert.js",
                     "~/js/prettify.js",
                     "~/js/holder.js",
                     "~/js/metro.docs.js"));
@@ -37,6 +38,8 @@ namespace IkeMed.Metro.Web
                     "~/css/iconFont.min.css",
                     "~/css/metro-bootstrap.css",
                     "~/css/metro-bootstrap-responsive.css",
+                    "~/css/metro-alert.css",
+                    "~/css/metro-alert-theme-*",
                     "~/css/common.css"));
         }
     }

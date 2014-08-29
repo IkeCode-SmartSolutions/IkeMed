@@ -1,0 +1,26 @@
+/* === Back Shade === */
+.ikecode-alert-shade.sky
+{
+	background: rgba(0, 0, 0, 0.8);
+}
+
+/* === Alert, Confirm, Prompt Back === */
+.ikecode-alert-alert.sky
+{
+	background: #3498db;
+	color: #ecf0f1;
+}
+
+/* === Notification Back === */
+.ikecode-alert-message.sky
+{
+	background: #3498db;
+	color: #ecf0f1;
+	border: 3px solid rgba(255,255,255,0.1);
+}
+
+/* === Buttons === */
+.ikecode-alert-alert.sky .ikecode-alert-foot button
+{
+	color: #3498db;
+}

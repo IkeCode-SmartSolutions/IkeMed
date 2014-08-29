@@ -8,9 +8,9 @@
         options: {
             format: "dd/mm/yyyy",
             date: undefined,
-            effect: 'none',
-            position: 'bottom',
-            locale: $.Metro.currentLocale,
+            effect: 'fade',
+            position: 'top',
+            locale: 'ptbr',//$.Metro.currentLocale,
             weekStart: (METRO_WEEK_START != undefined ? METRO_WEEK_START : 0), // 0 - Sunday, 1 - Monday
             otherDays: false,
             selected: function(d, d0){},
@@ -18,7 +18,7 @@
         },
 
 
-        _create: function(){
+        _create: function () {
             var that = this,
                 element = this.element,
                 input = element.children("input"),

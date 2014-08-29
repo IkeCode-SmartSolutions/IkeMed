@@ -140,6 +140,11 @@
   <ItemGroup>
     <Content Include="css\common.css" />
     <Content Include="css\iconFont.min.css" />
+    <Content Include="css\metro-alert-theme-greensea.css" />
+    <Content Include="css\metro-alert-theme-midnight.css" />
+    <Content Include="css\metro-alert-theme-pumpkin.css" />
+    <Content Include="css\metro-alert-theme-sky.css" />
+    <Content Include="css\metro-alert.css" />
     <Content Include="css\metro-bootstrap-responsive.css" />
     <Content Include="css\metro-bootstrap-responsive.min.css" />
     <Content Include="css\metro-bootstrap.css" />
@@ -149,6 +154,7 @@
     <Content Include="fonts\iconFont.svg" />
     <Content Include="fonts\metroSysIcons.svg" />
     <Content Include="Global.asax" />
+    <Content Include="js\ext-plugins\metro-alert.js" />
     <Content Include="js\holder.js" />
     <Content Include="js\jquery.mousewheel.js" />
     <Content Include="js\jquery.widget.min.js" />

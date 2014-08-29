@@ -1,7 +1,7 @@
-(function($){
-    $.Metro.currentLocale = 'en';
+(function ($) {
+    $.Metro.currentLocale = 'ptbr';
 
-    if (METRO_LOCALE != undefined)  $.Metro.currentLocale = METRO_LOCALE; else $.Metro.currentLocale = 'en';
+    if (METRO_LOCALE != undefined) $.Metro.currentLocale = METRO_LOCALE; else $.Metro.currentLocale = 'ptbr';
     //console.log(METRO_LOCALE, $.Metro.currentLocale);
 
     $.Metro.Locale = {
@@ -87,7 +87,7 @@
         'it': {
             months: [
                 'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre',
-                'Gen',' Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'
+                'Gen', ' Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'
             ],
             days: [
                 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica',
@@ -123,10 +123,23 @@
             buttons: [
                "Hoy", "Limpiar", "Cancel", "Help", "Prior", "Next", "Finish"
             ]
+        },
+        'ptbr': {
+            months: [
+                "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro",
+                "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+            ],
+            days: [
+                "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado",
+                "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"
+            ],
+            buttons: [
+                "Hoje", "Limpar", "Cancelar", "Ajuda", "Anterior", "Próximo", "Finalizar"
+            ]
         }
     };
 
-    $.Metro.setLocale = function(locale, data){
+    $.Metro.setLocale = function (locale, data) {
         $.Metro.Locale[locale] = data;
     };
 })(jQuery);
