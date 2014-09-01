@@ -38,6 +38,7 @@
 
             button.on('click', function(e){
                 e.stopPropagation();
+                e.preventDefault();
                 if (that.options._calendar.css('display') == 'none') {
                     that._show();
                 } else {

@@ -7,7 +7,9 @@
         font-size: smaller;
     }
 </style>
-@using (Ajax.BeginForm("Post", "RegisterPerson", new AjaxOptions() { HttpMethod = "post", OnComplete = "registerPerson.saveResult" }))
+@using (Ajax.BeginForm("Post", "RegisterPerson", 
+            new AjaxOptions() { HttpMethod = "post", OnComplete = "registerPerson.saveResult" }, 
+            new { enctype = "multipart/form-data" }))
 {
     Html.AntiForgeryToken();
     <fieldset>
@@ -54,20 +56,62 @@
 
                             <div data-role-isactive="true">
                                 @Html.LabelFor(m => m.Person.Doctor.AdmissionDate)
-                                <div class="input-control text size4" data-role="datepicker" data-effect="slide">
-                                    @Html.TextBoxFor(m => m.Person.Doctor.AdmissionDate)
-                                    <button class="btn-date"></button>
+                                <div class="input-control text size4"
+                                     data-role="datepicker"
+                                     data-effect="fade">
+                                    @Html.TextBoxFor(m => m.Person.Doctor.AdmissionDate, "{0:dd/MM/yyyy}")
                                     @Html.Partial("Widgets/_DatePicker")
                                     @Html.ValidationMessageFor(m => m.Person.Doctor.AdmissionDate)
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
-                                @Html.LabelFor(m => m.Person.Doctor.Birthdate)
-                                <div class="input-control text size4" data-role="datepicker" data-effect="slide">
-                                    @Html.TextBoxFor(m => m.Person.Doctor.Birthdate)
-                                    <button class="btn-date"></button>
+    if (Model.Person.NaturalPerson != null && Model.Person.NaturalPerson.ID > 0 || Model.PersonType == PersonTypeEnum.Natural)
+    {
+        <div class="grid fluid">
+            <div class="row">
+                <div class="span12">
+                    <div class="panel" data-role="panel">
+                        <div class="panel-header bg-dark fg-white">
+                            @Html.DisplayNameFor(m => m.Person.NaturalPerson)
+                        </div>
+                        <div class="panel-content" style="display: block;">
+                            <div class="input-control switch" data-role="input-control">
+                                <label class="inline-block" style="margin-right: 20px">
+                                    Ativo
+                                    @Html.CheckBoxFor(m => m.Person.NaturalPerson.IsActive)
+                                    <span class="check"></span>
+                                </label>
+                            </div>
+
+                            <div data-role-isactive="true">
+                                @Html.LabelFor(m => m.Person.NaturalPerson.Birthdate)
+                                <div class="input-control text size4"
+                                     data-role="datepicker"
+                                     data-effect="fade">
+                                    @Html.TextBoxFor(m => m.Person.NaturalPerson.Birthdate, "{0:dd/MM/yyyy}")
                                     @Html.Partial("Widgets/_DatePicker")
-                                    @Html.ValidationMessageFor(m => m.Person.Doctor.Birthdate)
+                                    @Html.ValidationMessageFor(m => m.Person.Doctor.AdmissionDate)
                                 </div>
+                            </div>
+
+                            <div class="clearfix">
+                                <div class="input-control radio default-style inline-block" data-role="input-control">
+                                    @Html.RadioButtonForEnum(m => m.Person.NaturalPerson.Gender)
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Person.NaturalPerson.Gender)
+                            </div>
+
+                            @Html.LabelFor(m => m.Person.NaturalPerson.ProfileImage)
+                            <div class="input-control file size8" data-role="input-control">
+                                @Html.TextBoxFor(m => m.Person.NaturalPerson.ProfileImage, new { type = "file" })
+                                <button class="btn-file" type="button"></button>
+                                @Html.ValidationMessageFor(m => m.Person.NaturalPerson.ProfileImage)
                             </div>
                         </div>
                     </div>
@@ -79,7 +123,7 @@
     <div class="pull-right">
         <input type="reset" class="button large" value="Limpar" />
         <input type="reset" class="button large danger" value="Apagar" />
-        <input type="submit" class="button large success" value="Salvar" />        
+        <input type="submit" class="button large success" value="Salvar" />
     </div>
 }
 @section scripts{

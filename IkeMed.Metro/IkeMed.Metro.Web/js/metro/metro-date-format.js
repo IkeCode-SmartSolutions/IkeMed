@@ -101,9 +101,9 @@ var dateFormat = function () {
 // Some common format strings
 dateFormat.masks = {
     "default":      "ddd mmm dd yyyy HH:MM:ss",
-    shortDate:      "m/d/yy",
-    mediumDate:     "mmm d, yyyy",
-    longDate:       "mmmm d, yyyy",
+    shortDate:      "dd/MM/yy",
+    mediumDate:     "d mmm, yyyy",
+    longDate:       "d mmmm  yyyy",
     fullDate:       "dddd, mmmm d, yyyy",
     shortTime:      "h:MM TT",
     mediumTime:     "h:MM:ss TT",

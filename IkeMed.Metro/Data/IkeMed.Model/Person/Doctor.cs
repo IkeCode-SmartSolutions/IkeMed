@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IkeMed.Model.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -12,22 +13,24 @@ namespace IkeMed.Model
 {
     public class Doctor : BaseModel
     {
-        [Required, Display(Name = "Data de Admissão"), DataType(DataType.Date)]
-        public DateTime AdmissionDate { get; set; }
+        [Display(Name = "Tipo de Pessoa")]
+        public PersonTypeEnum PersonType { get; private set; }
 
-        [Required, Display(Name = "Data de Aniversário"), DataType(DataType.Date)]
-        public DateTime Birthdate { get; set; }
+        [Display(Name = "Data de Admissão"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required, DataType(DataType.Date)]
+        public DateTime AdmissionDate { get; set; }
 
         [Display(Name = "Imagem de Perfil")]
         public string ProfileImage { get; set; }
 
+        [Display(Name = "Pessoa")]
         public virtual Person Person { get; set; }
 
         public Doctor()
             : base()
         {
+            this.PersonType = PersonTypeEnum.Doctor;
             this.AdmissionDate = (DateTime)SqlDateTime.MinValue;
-            this.Birthdate = (DateTime)SqlDateTime.MinValue;
         }
     }
 }

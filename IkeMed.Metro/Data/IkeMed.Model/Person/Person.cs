@@ -21,10 +21,10 @@ namespace IkeMed.Model
         [Display(Name = "Médico")]
         public virtual Doctor Doctor { get; set; }
 
-        [Display(Name = "Pessoa Física")]
-        public virtual LegalPerson LegalPerson { get; set; }
-        
         [Display(Name = "Pessoa Jurídica")]
+        public virtual LegalPerson LegalPerson { get; set; }
+
+        [Display(Name = "Pessoa Física")]
         public virtual NaturalPerson NaturalPerson { get; set; }
 
         public virtual ICollection<Address> Addresses { get; set; }

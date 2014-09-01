@@ -140,10 +140,10 @@
   <ItemGroup>
     <Content Include="css\common.css" />
     <Content Include="css\iconFont.min.css" />
-    <Content Include="css\metro-alert-theme-greensea.css" />
-    <Content Include="css\metro-alert-theme-midnight.css" />
-    <Content Include="css\metro-alert-theme-pumpkin.css" />
-    <Content Include="css\metro-alert-theme-sky.css" />
+    <Content Include="css\metro-alert-theme-green.css" />
+    <Content Include="css\metro-alert-theme-dark.css" />
+    <Content Include="css\metro-alert-theme-orange.css" />
+    <Content Include="css\metro-alert-theme-blue.css" />
     <Content Include="css\metro-alert.css" />
     <Content Include="css\metro-bootstrap-responsive.css" />
     <Content Include="css\metro-bootstrap-responsive.min.css" />

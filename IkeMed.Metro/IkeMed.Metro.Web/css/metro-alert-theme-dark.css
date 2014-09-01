@@ -1,0 +1,23 @@
+/* === Back Shade === */
+.ikecode-alert-shade.dark {
+    background: rgba(51, 51, 51, 0.5);
+}
+
+/* === Alert, Confirm, Prompt Back === */
+.ikecode-alert-alert.dark {
+    background: #333;
+    color: #ecf0f1;
+}
+
+/* === Notification Back === */
+.ikecode-alert-message.dark {
+    background: #333;
+    color: #fff;
+    border: 2px solid #444;
+}
+
+/* === Buttons === */
+.ikecode-alert-alert.dark .ikecode-alert-foot button {
+    color: #2c3e50;
+    background-color: #d9d9d9;
+}

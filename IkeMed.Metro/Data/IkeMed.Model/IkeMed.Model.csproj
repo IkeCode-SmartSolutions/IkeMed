@@ -51,12 +51,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseModel.cs" />
+    <Compile Include="Enums\AddressTypeEnum.cs" />
+    <Compile Include="Enums\GenderEnum.cs" />
     <Compile Include="Enums\PersonTypeEnum.cs" />
     <Compile Include="Enums\PhoneTypeEnum.cs" />
     <Compile Include="IkeMedContext.cs" />
     <Compile Include="Migrations\201408211457514_Initial.cs" />
     <Compile Include="Migrations\201408211457514_Initial.Designer.cs">
       <DependentUpon>201408211457514_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409011317247_EnumTypes.cs" />
+    <Compile Include="Migrations\201409011317247_EnumTypes.Designer.cs">
+      <DependentUpon>201409011317247_EnumTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Person\Address.cs">
@@ -91,6 +97,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201408211457514_Initial.resx">
       <DependentUpon>201408211457514_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409011317247_EnumTypes.resx">
+      <DependentUpon>201409011317247_EnumTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

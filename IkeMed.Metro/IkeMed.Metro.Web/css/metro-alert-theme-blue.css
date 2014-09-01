@@ -1,18 +1,18 @@
 /* === Back Shade === */
-.ikecode-alert-shade.sky
+.ikecode-alert-shade.blue
 {
-	background: rgba(0, 0, 0, 0.8);
+	background: rgba(52, 152, 219, 0.25);
 }
 
 /* === Alert, Confirm, Prompt Back === */
-.ikecode-alert-alert.sky
+.ikecode-alert-alert.blue
 {
 	background: #3498db;
 	color: #ecf0f1;
 }
 
 /* === Notification Back === */
-.ikecode-alert-message.sky
+.ikecode-alert-message.blue
 {
 	background: #3498db;
 	color: #ecf0f1;
@@ -20,7 +20,7 @@
 }
 
 /* === Buttons === */
-.ikecode-alert-alert.sky .ikecode-alert-foot button
+.ikecode-alert-alert.blue .ikecode-alert-foot button
 {
 	color: #3498db;
 }

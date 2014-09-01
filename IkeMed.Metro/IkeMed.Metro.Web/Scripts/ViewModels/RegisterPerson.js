@@ -6,9 +6,24 @@
         //console.log(result);
 
         if (result.success) {
-            $.Notify({ style: { background: 'green', color: 'white' }, content: "Registro salvo com sucesso!" });
+            $.notification({
+                //title: "Title",
+                message: "Registro salvo com sucesso!",
+                position: 'topcenter',
+                theme: 'green',
+                interval: 3000,
+                close: true
+            });
+
         } else {
-            $.Notify({ style: { background: 'red', color: 'white' }, content: "Ocorreu um erro ao processar sua solicitação!" });
+            $.alert({
+                title: "Ops...",
+                message: "Ocorreu um erro ao processar sua solicitação!",
+                position: 'topcenter',
+                theme: 'orange',
+                interval: 3000,
+                close: true
+            });
         }
     }
 }

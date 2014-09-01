@@ -256,12 +256,12 @@
             foot: '<div class="ikecode-alert-foot"></div>',
             input: '<div class="ikecode-alert-input"><input type="text" id="ikecode-promt-input"/></div>',
             buttons: {
-                yes: '<button id="ikecode-button-yes">|lang|yes|/lang|</button>',
-                no: '<button id="ikecode-button-not">|lang|no|/lang|</button>',
-                ok: '<button id="ikecode-button-ok">|lang|ok|/lang|</button>',
-                cancel: '<button id="ikecode-button-cancel">|lang|cancel|/lang|</button>',
-                close: '<button id="ikecode-button-close">|lang|close|/lang|</button>',
-                btn: '<button class="ikecode-custom-button"></button>'
+                yes: '<button class="button large" id="ikecode-button-yes">|lang|yes|/lang|</button>',
+                no: '<button class="button large" id="ikecode-button-not">|lang|no|/lang|</button>',
+                ok: '<button class="button large" id="ikecode-button-ok">|lang|ok|/lang|</button>',
+                cancel: '<button class="button large" id="ikecode-button-cancel">|lang|cancel|/lang|</button>',
+                close: '<button class="button large" id="ikecode-button-close">|lang|close|/lang|</button>',
+                btn: '<button class="button large ikecode-custom-button"></button>'
             }
         },
 

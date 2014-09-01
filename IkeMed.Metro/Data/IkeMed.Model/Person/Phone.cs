@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IkeMed.Model.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,12 +12,15 @@ namespace IkeMed.Model
     public class Phone : BaseModel
     {
         [Required]
-        [MaxLength(30)]
+        [Display(Name = "Número"), MaxLength(30), DataType(DataType.PhoneNumber)]
         [Index("IX_PHONE_NUMBER", IsUnique = true)]
         public string Number { get; set; }
-        [Required]
-        public int PhoneType { get; set; }
 
+        [Required]
+        [Display(Name = "Tipo de Telefone")]
+        public PhoneTypeEnum PhoneType { get; set; }
+
+        [Display(Name = "Pessoa")]
         public virtual Person Person { get; set; }
 
         public Phone()

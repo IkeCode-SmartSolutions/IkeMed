@@ -18,6 +18,7 @@ namespace IkeMed.Model
 
         public DateTime DateIns { get; set; }
         public DateTime LastUpdate { get; set; }
+
         [Display(Name = "Ativo")]
         public bool IsActive { get; set; }
 

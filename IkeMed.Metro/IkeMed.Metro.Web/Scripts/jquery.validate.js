@@ -1015,8 +1015,9 @@ $.extend($.validator, {
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/date
-		date: function(value, element) {
-			return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+		date: function (value, element) {
+		    var d = value.split("/");
+		    return this.optional(element) || !/Invalid|NaN/.test(new Date((/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())) ? d[1] + "/" + d[0] + "/" + d[2] : value));
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/dateISO

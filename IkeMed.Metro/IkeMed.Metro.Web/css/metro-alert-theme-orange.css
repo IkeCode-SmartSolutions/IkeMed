@@ -1,18 +1,18 @@
 /* === Back Shade === */
-.ikecode-alert-shade.pumpkin
+.ikecode-alert-shade.orange
 {
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(511, 84, 0, 0.10);
 }
 
 /* === Alert, Confirm, Prompt Back === */
-.ikecode-alert-alert.pumpkin
+.ikecode-alert-alert.orange
 {
 	background: #d35400;
 	color: #ecf0f1;	
 }
 
 /* === Notification Back === */
-.ikecode-alert-message.pumpkin
+.ikecode-alert-message.orange
 {
 	background: #d35400;
 	color: #ecf0f1;
@@ -20,7 +20,7 @@
 }
 
 /* === Buttons === */
-.ikecode-alert-alert.pumpkin .ikecode-alert-foot button
+.ikecode-alert-alert.orange .ikecode-alert-foot button
 {
-	color: #d35400;
+	color: #000;
 }

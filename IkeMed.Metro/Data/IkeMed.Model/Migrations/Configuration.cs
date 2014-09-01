@@ -1,5 +1,6 @@
 namespace IkeMed.Model.Migrations
 {
+    using IkeMed.Model.Enums;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -32,8 +33,7 @@ namespace IkeMed.Model.Migrations
                 Email = "ikecode@gmail.com",
                 Doctor = new Doctor()
                         {
-                            AdmissionDate = DateTime.Now.AddYears(-2),
-                            Birthdate = new DateTime(1989, 12, 20)
+                            AdmissionDate = DateTime.Now.AddYears(-2)
                         },
                 LegalPerson = new LegalPerson()
                         {
@@ -43,7 +43,7 @@ namespace IkeMed.Model.Migrations
                 NaturalPerson = new NaturalPerson()
                         {
                             Birthdate = new DateTime(1989, 12, 20),
-                            Gender = 2
+                            Gender = GenderEnum.Male
                         },
                 Documents = new List<Document>()
                 {
@@ -69,7 +69,7 @@ namespace IkeMed.Model.Migrations
                     new Phone()
                     {
                         Number = "11 988856996",
-                        PhoneType = 1
+                        PhoneType = PhoneTypeEnum.Mobile
                     }
                 },
                 Addresses = new List<Address>()
@@ -83,7 +83,7 @@ namespace IkeMed.Model.Migrations
                         Neighborhood = "Vila Olimpia",
                         Complement = "cj 131",
                         ZipCode = "05550-000",
-                        AddressType = 1
+                        AddressType = AddressTypeEnum.Commercial
                     }
                 }
             };
