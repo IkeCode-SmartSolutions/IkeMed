@@ -2,19 +2,16 @@
 @{
     ViewBag.Title = string.Format("Cadastro -> {0}", Model.PersonType.GetDisplayName<PersonTypeEnum>());
 }
-<style>
-    .errorBlock {
-        font-size: smaller;
-    }
-</style>
-@using (Ajax.BeginForm("Post", "RegisterPerson", 
-            new AjaxOptions() { HttpMethod = "post", OnComplete = "registerPerson.saveResult" }, 
-            new { enctype = "multipart/form-data" }))
+
+@using (Html.BeginForm("Post", 
+                       "RegisterPerson", 
+                       FormMethod.Post,
+                       new { enctype = "multipart/form-data" }))
 {
     Html.AntiForgeryToken();
     <fieldset>
         <legend>Geral</legend>
-
+        @Html.HiddenFor(m => m.Person.ID)
         <div class="input-control switch" data-role="input-control">
             <label class="inline-block" style="margin-right: 20px">
                 Ativo
@@ -39,6 +36,7 @@
     if (Model.Person.Doctor != null && Model.Person.Doctor.ID > 0 || Model.PersonType == PersonTypeEnum.Doctor)
     {
         <div class="grid fluid">
+            @Html.HiddenFor(m => m.Person.Doctor.ID)
             <div class="row">
                 <div class="span12">
                     <div class="panel" data-role="panel">
@@ -74,6 +72,7 @@
     if (Model.Person.NaturalPerson != null && Model.Person.NaturalPerson.ID > 0 || Model.PersonType == PersonTypeEnum.Natural)
     {
         <div class="grid fluid">
+            @Html.HiddenFor(m => m.Person.NaturalPerson.ID)
             <div class="row">
                 <div class="span12">
                     <div class="panel" data-role="panel">
@@ -101,18 +100,18 @@
                             </div>
 
                             <div class="clearfix">
-                                <div class="input-control radio default-style inline-block" data-role="input-control">
-                                    @Html.RadioButtonForEnum(m => m.Person.NaturalPerson.Gender)
+                                    <div class="input-control radio default-style inline-block" data-role="input-control">
+                                        @Html.RadioButtonForEnum(m => m.Person.NaturalPerson.Gender)
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Person.NaturalPerson.Gender)
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Person.NaturalPerson.Gender)
-                            </div>
 
                             @Html.LabelFor(m => m.Person.NaturalPerson.ProfileImage)
                             <div class="input-control file size8" data-role="input-control">
-                                @Html.TextBoxFor(m => m.Person.NaturalPerson.ProfileImage, new { type = "file" })
+                                @Html.TextBoxFor(m => m.Person.NaturalPerson.ProfileImage, new { type = "file", accept = "image/*" })
                                 <button class="btn-file" type="button"></button>
-                                @Html.ValidationMessageFor(m => m.Person.NaturalPerson.ProfileImage)
                             </div>
+                            @Html.ValidationMessageFor(m => m.Person.NaturalPerson.ProfileImage)
                         </div>
                     </div>
                 </div>
@@ -128,4 +127,11 @@
 }
 @section scripts{
     <script type="text/javascript" src="~/Scripts/ViewModels/RegisterPerson.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.validator.addMethod('accept', function () { return true; });
+        });
+
+    </script>
 }

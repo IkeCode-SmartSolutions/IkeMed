@@ -8,6 +8,7 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace IkeMed.Model
 {
@@ -24,8 +25,14 @@ namespace IkeMed.Model
         [Required, DataType(DataType.Date)]
         public DateTime Birthdate { get; set; }
 
-        [Display(Name = "Imagem de Perfil"), FileExtensions(Extensions="jpeg,png,bmp,gif"), DataType(DataType.Upload)]
-        public string ProfileImage { get; set; }
+        [Display(Name = "Imagem de Perfil")]
+        [NotMapped]
+        //FileExtensions(Extensions="jpeg,png,bmp,gif"), DataType(DataType.Upload)
+        public HttpPostedFileWrapper ProfileImage { get; set; }
+
+        [Display(Name = "Url da Imagem de Perfil")]
+        //FileExtensions(Extensions="jpeg,png,bmp,gif"), DataType(DataType.Upload)
+        public string ProfileImageUrl { get; set; }
 
         [Display(Name = "Pessoa")]
         public virtual Person Person { get; set; }

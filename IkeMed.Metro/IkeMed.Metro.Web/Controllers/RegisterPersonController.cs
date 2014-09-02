@@ -6,6 +6,7 @@ using IkeMed.Model;
 using IkeMed.Model.Enums;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -45,13 +46,23 @@ namespace IkeMed.Metro.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult Post(Person person)
+        public ActionResult Post(Person person)
         {
             var success = true;
 
-            var a = person;
+            if (person.NaturalPerson.ProfileImage != null && person.NaturalPerson.ProfileImage.ContentLength > 0)
+            {
+                string filePath = Path.Combine(Server.MapPath("~/Uploads/ProfileImages"), Path.GetFileName(person.NaturalPerson.ProfileImage.FileName));
+                //string url = Url.Content("~/Uploads/ProfileImages", Path.GetFileName(person.NaturalPerson.ProfileImage.FileName));
+                //person.NaturalPerson.ProfileImageUrl = url;
+                person.NaturalPerson.ProfileImage.SaveAs(filePath);
+            }
 
-            return Json(new { success = success, asd = 123, qwe = "foi" }, JsonRequestBehavior.AllowGet);
+            var vm = new RegisterPersonViewModel(PersonTypeEnum.Doctor);
+            vm.SetPerson(person);
+            //return View("Index", vm);
+            return RedirectToRoute("RegisterPerson", new { saved = success, personType = PersonTypeEnum.Doctor.GetEnumRouteNameAttributeValue(), id = person.ID });
+            //return Json(new { success = success, person = person }, JsonRequestBehavior.AllowGet);
         }
     }
 }

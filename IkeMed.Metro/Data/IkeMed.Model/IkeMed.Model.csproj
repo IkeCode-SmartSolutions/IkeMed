@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +64,10 @@
     <Compile Include="Migrations\201409011317247_EnumTypes.cs" />
     <Compile Include="Migrations\201409011317247_EnumTypes.Designer.cs">
       <DependentUpon>201409011317247_EnumTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409021222110_ProfileImage.cs" />
+    <Compile Include="Migrations\201409021222110_ProfileImage.Designer.cs">
+      <DependentUpon>201409021222110_ProfileImage.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Person\Address.cs">
@@ -100,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409011317247_EnumTypes.resx">
       <DependentUpon>201409011317247_EnumTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409021222110_ProfileImage.resx">
+      <DependentUpon>201409021222110_ProfileImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

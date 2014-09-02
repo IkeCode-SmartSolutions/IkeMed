@@ -16,7 +16,7 @@ namespace IkeMed.Metro.Web
             routes.MapRoute(
                 name: "RegisterPerson",
                 url: "cadastro/pessoa/{personType}/{id}",
-                defaults: new { controller = "RegisterPerson", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "RegisterPerson", action = "Index", id = UrlParameter.Optional, saved = false }
             );
 
             routes.MapRoute(
