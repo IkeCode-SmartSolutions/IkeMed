@@ -128,6 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Base\BaseController.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
+    <Compile Include="Base\GeneralConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegisterPersonController.cs" />
     <Compile Include="Global.asax.cs">

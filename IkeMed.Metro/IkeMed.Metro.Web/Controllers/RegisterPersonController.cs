@@ -21,7 +21,7 @@ namespace IkeMed.Metro.Web.Controllers
         {
         }
 
-        public ActionResult Index(string personType, int id = 0)
+        public ActionResult Index(string personType, int id = 0, bool saved = false)
         {
             PersonTypeEnum type = personType.GetEnumRouteNameAttribute<PersonTypeEnum>();
             var vm = new RegisterPersonViewModel(type);
@@ -48,8 +48,6 @@ namespace IkeMed.Metro.Web.Controllers
         [HttpPost]
         public ActionResult Post(Person person)
         {
-            var success = true;
-
             if (person.NaturalPerson.ProfileImage != null && person.NaturalPerson.ProfileImage.ContentLength > 0)
             {
                 string filePath = Path.Combine(Server.MapPath("~/Uploads/ProfileImages"), Path.GetFileName(person.NaturalPerson.ProfileImage.FileName));
@@ -60,8 +58,14 @@ namespace IkeMed.Metro.Web.Controllers
 
             var vm = new RegisterPersonViewModel(PersonTypeEnum.Doctor);
             vm.SetPerson(person);
-            //return View("Index", vm);
-            return RedirectToRoute("RegisterPerson", new { saved = success, personType = PersonTypeEnum.Doctor.GetEnumRouteNameAttributeValue(), id = person.ID });
+            return View("Index", vm);
+
+            //return RedirectToRoute("RegisterPerson",
+            //    new
+            //    {
+            //        personType = PersonTypeEnum.Doctor.GetEnumRouteNameAttributeValue(),
+            //        id = person.ID
+            //    });
             //return Json(new { success = success, person = person }, JsonRequestBehavior.AllowGet);
         }
     }

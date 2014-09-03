@@ -9,6 +9,7 @@ namespace IkeMed.Metro.Web.Base
 {
     public class BaseController : Controller
     {
+        protected static string BaseUrl { get; private set; }
         protected IkeMedContext IkeMedContext;
 
         public BaseController()
@@ -17,6 +18,7 @@ namespace IkeMed.Metro.Web.Base
             this.SetPageTitle("");
             this.SetPageSmallTitle("");
             this.IkeMedContext = new IkeMedContext();
+            BaseUrl = Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.UriEscaped);
         }
 
         #region Header Title
