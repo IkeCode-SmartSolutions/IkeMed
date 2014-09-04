@@ -67,5 +67,24 @@ namespace IkeMed.Model
                 .WithMany(m => m.Documents)
                 .Map(m => m.MapKey("DocumentTypeId"));
         }
+
+        public override int SaveChanges()
+        {
+            var modifiedEntries = this.ChangeTracker.Entries()
+                .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified).ToList();
+
+            foreach (var dbEntityEntry in modifiedEntries)
+            {
+                if ((DateTime)dbEntityEntry.Property("DateIns").CurrentValue == DateTime.MinValue
+                    || dbEntityEntry.State == EntityState.Added)
+                {
+                    dbEntityEntry.Property("DateIns").CurrentValue = DateTime.Now;
+                }
+
+                dbEntityEntry.Property("LastUpdate").CurrentValue = DateTime.Now;
+            }
+
+            return base.SaveChanges();
+        }
     }
 }

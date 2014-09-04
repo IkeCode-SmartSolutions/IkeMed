@@ -44,6 +44,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseModel.cs" />
+    <Compile Include="Base\IBaseModel.cs" />
     <Compile Include="Enums\AddressTypeEnum.cs" />
     <Compile Include="Enums\GenderEnum.cs" />
     <Compile Include="Enums\PersonTypeEnum.cs" />
@@ -68,6 +70,10 @@
     <Compile Include="Migrations\201409021222110_ProfileImage.cs" />
     <Compile Include="Migrations\201409021222110_ProfileImage.Designer.cs">
       <DependentUpon>201409021222110_ProfileImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409041436178_ProfileImage2.cs" />
+    <Compile Include="Migrations\201409041436178_ProfileImage2.Designer.cs">
+      <DependentUpon>201409041436178_ProfileImage2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Person\Address.cs">
@@ -108,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201409021222110_ProfileImage.resx">
       <DependentUpon>201409021222110_ProfileImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409041436178_ProfileImage2.resx">
+      <DependentUpon>201409041436178_ProfileImage2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,9 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Migrations;
+using System.Data.Entity;
+using IkeCode;
 
 namespace IkeMed.Metro.Web.Controllers
 {
@@ -48,25 +51,17 @@ namespace IkeMed.Metro.Web.Controllers
         [HttpPost]
         public ActionResult Post(Person person)
         {
-            if (person.NaturalPerson.ProfileImage != null && person.NaturalPerson.ProfileImage.ContentLength > 0)
+            using (var context = new IkeMedContext())
             {
-                string filePath = Path.Combine(Server.MapPath("~/Uploads/ProfileImages"), Path.GetFileName(person.NaturalPerson.ProfileImage.FileName));
-                //string url = Url.Content("~/Uploads/ProfileImages", Path.GetFileName(person.NaturalPerson.ProfileImage.FileName));
-                //person.NaturalPerson.ProfileImageUrl = url;
-                person.NaturalPerson.ProfileImage.SaveAs(filePath);
+                person.SaveImages();
+                person.SetEntitiesState(context);
+
+                context.SaveChanges();
             }
 
             var vm = new RegisterPersonViewModel(PersonTypeEnum.Doctor);
             vm.SetPerson(person);
             return View("Index", vm);
-
-            //return RedirectToRoute("RegisterPerson",
-            //    new
-            //    {
-            //        personType = PersonTypeEnum.Doctor.GetEnumRouteNameAttributeValue(),
-            //        id = person.ID
-            //    });
-            //return Json(new { success = success, person = person }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -18,6 +18,12 @@ namespace IkeMed.Metro.Web.Base
             this.SetPageTitle("");
             this.SetPageSmallTitle("");
             this.IkeMedContext = new IkeMedContext();
+            
+        }
+
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
             BaseUrl = Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.UriEscaped);
         }
 

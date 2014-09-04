@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CustomAttributes\EnumRouteNameAttribute.cs" />
     <Compile Include="CustomAttributes\Helpers\EnumDisplayAttributeHelper.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="HtmlHelpers\IkeCodeHtmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

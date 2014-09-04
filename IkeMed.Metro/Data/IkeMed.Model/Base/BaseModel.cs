@@ -24,8 +24,6 @@ namespace IkeMed.Model
 
         public BaseModel()
         {
-            this.DateIns = DateTime.Now;
-            this.LastUpdate = DateTime.Now;
             this.IsActive = true;
         }
 

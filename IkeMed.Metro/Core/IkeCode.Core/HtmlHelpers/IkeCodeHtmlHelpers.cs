@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace System.Web.Mvc.Html
 {
@@ -37,9 +38,20 @@ namespace System.Web.Mvc.Html
                     metaData.PropertyName,
                     name
                 );
-                var radio = htmlHelper.RadioButtonFor(expression, value, new { id = id }).ToHtmlString();
+
+                var func = expression.Compile();
+                var attributes = new RouteValueDictionary();
+                attributes["id"] = id;
+                if (name.Equals(metaData.Model.ToString(), StringComparison.InvariantCultureIgnoreCase))
+                {
+                    attributes["checked"] = "checked";
+                }
+
+                var isChecked = name.Equals(metaData.Model.ToString(), StringComparison.InvariantCultureIgnoreCase) ? "checked" : "false";
+
+                var radio = htmlHelper.RadioButtonFor(expression, value, attributes).ToHtmlString();
                 sb.AppendFormat(
-                    "<label class=\"inline-block\" style=\"margin-right: 5px;\">{0} <span class=\"check\"></span> {1}</label>",                    
+                    "<label class=\"inline-block\" style=\"margin-right: 5px;\">{0} <span class=\"check\"></span> {1}</label>",
                     radio,
                     HttpUtility.HtmlEncode(label)
                 );

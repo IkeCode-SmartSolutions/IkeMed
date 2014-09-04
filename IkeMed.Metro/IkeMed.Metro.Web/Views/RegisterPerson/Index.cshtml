@@ -62,6 +62,22 @@
                                     @Html.ValidationMessageFor(m => m.Person.Doctor.AdmissionDate)
                                 </div>
                             </div>
+
+                            @Html.LabelFor(m => m.Person.Doctor.ProfileImage)
+                            <div class="clearfix">
+                                @Html.HiddenFor(m => m.Person.Doctor.ProfileImageUrl)
+                                @if (!string.IsNullOrWhiteSpace(Model.Person.Doctor.ProfileImageUrl))
+                                {
+                                    <img src="@Model.Person.Doctor.ProfileImageUrl"
+                                         class="cycle"
+                                         alt="120x120" style="width: 120px; height: 120px;">
+                                }
+                                <div class="input-control file size8" data-role="input-control">
+                                    @Html.TextBoxFor(m => m.Person.Doctor.ProfileImage, new { type = "file", accept = "image/*" })
+                                    <button class="btn-file" type="button"></button>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Person.Doctor.ProfileImage)
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,11 +123,20 @@
                             </div>
 
                             @Html.LabelFor(m => m.Person.NaturalPerson.ProfileImage)
-                            <div class="input-control file size8" data-role="input-control">
-                                @Html.TextBoxFor(m => m.Person.NaturalPerson.ProfileImage, new { type = "file", accept = "image/*" })
-                                <button class="btn-file" type="button"></button>
+                            <div class="clearfix">
+                                @Html.HiddenFor(m => m.Person.NaturalPerson.ProfileImageUrl)
+                                @if (!string.IsNullOrWhiteSpace(Model.Person.NaturalPerson.ProfileImageUrl))
+                                {
+                                    <img src="@Model.Person.NaturalPerson.ProfileImageUrl"
+                                         class="cycle"
+                                         alt="120x120" style="width: 120px; height: 120px;">
+                                }
+                                <div class="input-control file size8" data-role="input-control">
+                                    @Html.TextBoxFor(m => m.Person.NaturalPerson.ProfileImage, new { type = "file", accept = "image/*" })
+                                    <button class="btn-file" type="button"></button>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Person.NaturalPerson.ProfileImage)
                             </div>
-                            @Html.ValidationMessageFor(m => m.Person.NaturalPerson.ProfileImage)
                         </div>
                     </div>
                 </div>
@@ -127,11 +152,4 @@
 }
 @section scripts{
     <script type="text/javascript" src="~/Scripts/ViewModels/RegisterPerson.js"></script>
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-            $.validator.addMethod('accept', function () { return true; });
-        });
-
-    </script>
 }

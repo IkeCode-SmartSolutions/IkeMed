@@ -22,6 +22,6 @@ namespace IkeMed.Metro.Web.Base
             }
         }
 
-        public string PhisicalPath { get { return Server.MapPath("~/Uploads/ProfileImages"); } }
+        //public string PhisicalPath { get { return Server.MapPath("~/Uploads/ProfileImages"); } }
     }
 }
