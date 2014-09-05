@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ikecode>
+  <default>
+    <logPath>c:\logs</logPath>
+  </default>
+  <verbose>
+    <enabled>true</enabled>
+  </verbose>
+  <exception>
+    <enabled>true</enabled>
+  </exception>
+  <warning>
+    <enabled>true</enabled>
+  </warning>
+</ikecode>
+

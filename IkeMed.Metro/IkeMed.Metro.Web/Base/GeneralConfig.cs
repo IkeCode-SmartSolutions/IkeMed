@@ -1,13 +1,15 @@
-﻿using System;
+﻿using IkeCode.Core.Xml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace IkeMed.Metro.Web.Base
 {
-    public class GeneralConfig
+    public class GeneralConfig : IkeCodeConfig
     {
-        public GeneralConfig()
+        public GeneralConfig(string section)
+            : base("General.xml", section)
         {
 
         }
@@ -17,11 +19,11 @@ namespace IkeMed.Metro.Web.Base
         {
             get
             {
-                _default = _default ?? new GeneralConfig();
+                _default = _default ?? new GeneralConfig("default");
                 return _default;
             }
         }
 
-        //public string PhisicalPath { get { return Server.MapPath("~/Uploads/ProfileImages"); } }
+        public string UploadPath { get { return this.GetString("uploadPath"); } }
     }
 }

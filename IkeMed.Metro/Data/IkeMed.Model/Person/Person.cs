@@ -1,4 +1,5 @@
 ﻿using IkeCode;
+using IkeCode.Core.Xml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,34 +49,37 @@ namespace IkeMed.Model
 
         public void SaveImages()
         {
+            var config = new IkeCodeConfig("General.xml", "default");
+            var path = config.GetString("uploadPath");
+
             if (HttpContext.Current != null)
             {
-                if (!Directory.Exists(HttpContext.Current.Server.MapPath("~/Uploads/ProfileImages")))
+                if (!Directory.Exists(HttpContext.Current.Server.MapPath(path)))
                 {
-                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Uploads/ProfileImages"));
+                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath(path));
                 }
 
-                var mappedPath = HttpContext.Current.Server.MapPath("~/Uploads/ProfileImages");
+                var mappedPath = HttpContext.Current.Server.MapPath(path);
 
                 if (this.NaturalPerson != null && this.NaturalPerson.ProfileImage != null && this.NaturalPerson.ProfileImage.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(this.NaturalPerson.ProfileImage.FileName);
                     string filePath = Path.Combine(mappedPath, fileName);
-                    this.NaturalPerson.ProfileImageUrl = string.Format("/Uploads/ProfileImages/{0}", fileName);
+                    this.NaturalPerson.ProfileImageUrl = string.Format("{0}/{1}", path, fileName);
                     this.NaturalPerson.ProfileImage.SaveAs(filePath);
                 }
                 if (this.LegalPerson != null && this.LegalPerson.ProfileImage != null && this.LegalPerson.ProfileImage.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(this.LegalPerson.ProfileImage.FileName);
                     string filePath = Path.Combine(mappedPath, fileName);
-                    this.LegalPerson.ProfileImageUrl = string.Format("/Uploads/ProfileImages/{0}", fileName);
+                    this.LegalPerson.ProfileImageUrl = string.Format("{0}/{1}", path, fileName);
                     this.LegalPerson.ProfileImage.SaveAs(filePath);
                 }
                 if (this.Doctor != null && this.Doctor.ProfileImage != null && this.Doctor.ProfileImage.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(this.Doctor.ProfileImage.FileName);
                     string filePath = Path.Combine(mappedPath, fileName);
-                    this.Doctor.ProfileImageUrl = string.Format("/Uploads/ProfileImages/{0}", fileName);
+                    this.Doctor.ProfileImageUrl = string.Format("{0}/{1}", path, fileName);
                     this.Doctor.ProfileImage.SaveAs(filePath);
                 }
             }

@@ -139,6 +139,8 @@
     <Compile Include="ViewModels\RegisterPersonViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\IkeCodeLog.xml" />
+    <Content Include="Config\General.xml" />
     <Content Include="css\common.css" />
     <Content Include="css\iconFont.min.css" />
     <Content Include="css\metro-alert-theme-green.css" />
