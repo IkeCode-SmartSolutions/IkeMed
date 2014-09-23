@@ -24,10 +24,14 @@ namespace IkeMed.Metro.Web.Controllers
         {
         }
 
-        public ActionResult Index(string personType, int id = 0, bool saved = false)
+        public ActionResult Index(int id = 0, string personType = "")
         {
-            PersonTypeEnum type = personType.GetEnumRouteNameAttribute<PersonTypeEnum>();
-            var vm = new RegisterPersonViewModel(type);
+            var vm = new RegisterPersonViewModel();
+            if (!string.IsNullOrWhiteSpace(personType))
+            {
+                PersonTypeEnum type = personType.GetEnumRouteNameAttribute<PersonTypeEnum>();
+                vm = new RegisterPersonViewModel(type);
+            }
 
             base.SetPageTitle("Cadastro");
             base.SetPageSmallTitle("Pessoa");

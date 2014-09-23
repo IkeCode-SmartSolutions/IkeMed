@@ -23,6 +23,7 @@ namespace IkeMed.Model
 
         [Display(Name = "Data de Aniversário"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required, DataType(DataType.Date)]
+        [MinDate("01/01/1930")]
         public DateTime Birthdate { get; set; }
 
         [Display(Name = "Imagem de Perfil")]
@@ -39,7 +40,7 @@ namespace IkeMed.Model
             : base()
         {
             this.PersonType = PersonTypeEnum.Natural;
-            this.Birthdate = (DateTime)SqlDateTime.MinValue;
+            //this.Birthdate = (DateTime)SqlDateTime.MinValue;
         }
     }
 }

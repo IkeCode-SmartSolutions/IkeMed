@@ -53,8 +53,12 @@
     <Compile Include="Cache\IkeCodeCache.cs" />
     <Compile Include="Common\FileWatcher.cs" />
     <Compile Include="Common\Tools.cs" />
+    <Compile Include="CustomAttributes\DontParseHtml.cs" />
     <Compile Include="CustomAttributes\EnumRouteNameAttribute.cs" />
     <Compile Include="CustomAttributes\Helpers\EnumDisplayAttributeHelper.cs" />
+    <Compile Include="CustomAttributes\Validators\MaxDateAttribute.cs" />
+    <Compile Include="CustomAttributes\Validators\MinDateAttribute.cs" />
+    <Compile Include="CustomAttributes\Validators\DateRangeAttribute.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="HtmlHelpers\IkeCodeHtmlHelpers.cs" />
     <Compile Include="Log\IkeCodeLog.cs" />
@@ -65,6 +69,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

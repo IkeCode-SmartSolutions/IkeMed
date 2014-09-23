@@ -19,6 +19,7 @@ namespace IkeMed.Model
 
         [Display(Name = "Data de Admissão"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required, DataType(DataType.Date)]
+        [MinDate("01/01/1930")]
         public DateTime AdmissionDate { get; set; }
 
         [Display(Name = "Imagem de Perfil")]
@@ -35,7 +36,7 @@ namespace IkeMed.Model
             : base()
         {
             this.PersonType = PersonTypeEnum.Doctor;
-            this.AdmissionDate = (DateTime)SqlDateTime.MinValue;
+            //this.AdmissionDate = (DateTime)SqlDateTime.MinValue;
         }
     }
 }

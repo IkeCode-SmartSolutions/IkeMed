@@ -17,7 +17,6 @@ namespace IkeMed.Metro.Web
         {
             Database.SetInitializer<IkeMedContext>(new MigrateDatabaseToLatestVersion<IkeMedContext, Configuration>());
 
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

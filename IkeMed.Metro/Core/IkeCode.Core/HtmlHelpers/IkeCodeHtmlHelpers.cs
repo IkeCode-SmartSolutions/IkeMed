@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IkeCode.Core.CustomAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace System.Web.Mvc.Html
             var enumType = metaData.ModelType;
             foreach (var field in enumType.GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public))
             {
+                if (field.GetCustomAttribute<DontParseHtml>(true) != null) continue;
+
                 var value = (int)field.GetValue(null);
                 var name = Enum.GetName(enumType, value);
                 var label = name;

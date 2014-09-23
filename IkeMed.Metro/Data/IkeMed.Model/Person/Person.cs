@@ -44,7 +44,6 @@ namespace IkeMed.Model
         public Person()
             : base()
         {
-
         }
 
         public void SaveImages()
