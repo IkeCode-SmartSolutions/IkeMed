@@ -10,11 +10,22 @@ namespace System.ComponentModel.DataAnnotations
 {
     public class MinDateAttribute : ValidationAttribute
     {
-        private const string DateFormat = "dd/MM/yyyy";
         private const string DefaultErrorMessage = "'{0}' deve ser maior que {1:d}.";
 
         public DateTime MinDate { get; set; }
         private bool ValidateSqlMinValue { get; set; }
+        private string _dateFormat = "dd/MM/yyyy";
+        private string DateFormat
+        {
+            get { return this._dateFormat; }
+            set
+            {
+                if (value == this._dateFormat || value == null)
+                    return;
+
+                this._dateFormat = value;
+            }
+        }
 
         public MinDateAttribute(string minDate)
             : base(DefaultErrorMessage)
@@ -28,6 +39,12 @@ namespace System.ComponentModel.DataAnnotations
             this.ValidateSqlMinValue = validateSqlMinValue;
         }
 
+        public MinDateAttribute(string minDate, string dateFormat, bool validateSqlMinValue)
+            : this(minDate, validateSqlMinValue)
+        {
+            this.DateFormat = dateFormat;
+        }
+
         public override bool IsValid(object value)
         {
             if (value == null || !(value is DateTime))
@@ -37,10 +54,10 @@ namespace System.ComponentModel.DataAnnotations
 
             DateTime dateValue = (DateTime)value;
 
-            var isValid = dateValue <= this.MinDate;
+            var isValid = dateValue >= this.MinDate;
 
             if (ValidateSqlMinValue)
-                isValid = isValid && dateValue > (DateTime)SqlDateTime.MinValue;
+                isValid = isValid && dateValue >= (DateTime)SqlDateTime.MinValue;
 
             return isValid;
         }
@@ -50,9 +67,9 @@ namespace System.ComponentModel.DataAnnotations
             return string.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, MinDate);
         }
 
-        private static DateTime ParseDate(string dateValue)
+        private DateTime ParseDate(string dateValue)
         {
-            return DateTime.ParseExact(dateValue, DateFormat, CultureInfo.InvariantCulture);
+            return DateTime.ParseExact(dateValue, this.DateFormat, CultureInfo.InvariantCulture);
         }
     }
 }

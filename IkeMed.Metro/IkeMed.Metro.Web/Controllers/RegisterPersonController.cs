@@ -38,14 +38,17 @@ namespace IkeMed.Metro.Web.Controllers
 
             if (id > 0)
             {
-                var person = (from p in base.IkeMedContext.People
-                              where p.ID == id
-                              select p).FirstOrDefault();
-
-                if (person != null)
+                using (var context = new IkeMedContext())
                 {
-                    base.SetPageTitle("Editar");
-                    vm.SetPerson(person);
+                    var person = (from p in context.People
+                                  where p.ID == id
+                                  select p).FirstOrDefault();
+
+                    if (person != null)
+                    {
+                        base.SetPageTitle("Editar");
+                        vm.SetPerson(person);
+                    }
                 }
             }
 
@@ -57,10 +60,7 @@ namespace IkeMed.Metro.Web.Controllers
         {
             using (var context = new IkeMedContext())
             {
-                person.SaveImages();
-                person.SetEntitiesState(context);
-
-                context.SaveChanges();
+                person.SaveChanges(context);
             }
 
             var vm = new RegisterPersonViewModel(PersonTypeEnum.Doctor);

@@ -10,15 +10,12 @@ namespace IkeMed.Metro.Web.Base
     public class BaseController : Controller
     {
         protected static string BaseUrl { get; private set; }
-        protected IkeMedContext IkeMedContext;
 
         public BaseController()
         {
             this.SetBackLink(null);
             this.SetPageTitle("");
-            this.SetPageSmallTitle("");
-            this.IkeMedContext = new IkeMedContext();
-            
+            this.SetPageSmallTitle("");            
         }
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

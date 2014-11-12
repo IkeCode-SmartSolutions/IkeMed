@@ -30,6 +30,7 @@ namespace IkeMed.Model
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<IkeMedContext, Configuration>());
 
@@ -98,14 +99,18 @@ namespace IkeMed.Model
                         eve.Entry.Entity.GetType().Name, eve.Entry.State);
                     foreach (var ve in eve.ValidationErrors)
                     {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
+                        Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                                            ve.PropertyName,
+                                            eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+                                            ve.ErrorMessage);
                     }
                 }
-            }
-            catch (Exception e)
-            {
 
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
             }
 
             return result;

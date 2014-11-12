@@ -8,6 +8,6 @@ namespace IkeMed.Model
 {
     public interface IBaseModel
     {
-        void SetEntitiesState(IkeMedContext context);
+        int SaveChanges(IkeMedContext context);
     }
 }

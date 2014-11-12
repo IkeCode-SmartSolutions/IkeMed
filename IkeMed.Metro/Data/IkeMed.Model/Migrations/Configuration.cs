@@ -88,7 +88,7 @@ namespace IkeMed.Model.Migrations
                 }
             };
             context.People.AddOrUpdate(p => p.Email, person);
-
+            base.Seed(context);
             context.SaveChanges();
         }
     }

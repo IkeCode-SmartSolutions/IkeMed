@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IkeMed.Model
 {
-    public partial class BaseModel
+    public class BaseModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -28,6 +28,11 @@ namespace IkeMed.Model
         }
 
         #region Common Methods
+
+        protected virtual void SetEntitiesState(IkeMedContext context)
+        {
+        
+        }
 
         #endregion Common Methods
     }

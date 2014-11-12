@@ -11,6 +11,7 @@ namespace IkeMed.Model.Enums
     public enum PersonTypeEnum
     {
         [DontParseHtml]
+        [Display(Name = "pessoa")]
         None = -1,
 
         [EnumRouteNameAttribute("fisica")]
