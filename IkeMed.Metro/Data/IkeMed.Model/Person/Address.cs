@@ -1,4 +1,5 @@
 ﻿using IkeMed.Model.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,6 +44,7 @@ namespace IkeMed.Model
         [Required]
         public AddressTypeEnum AddressType { get; set; }
         
+        [JsonIgnore]
         public virtual Person Person { get; set; }
 
         public Address()

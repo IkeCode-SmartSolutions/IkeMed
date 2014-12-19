@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,22 @@ namespace IkeCode.Core.Log
         public string FileNamePrefix { get; private set; }
         public static IkeCodeLog Default { get { return new IkeCodeLog(); } }
         private XDocument xml { get; set; }
+        private XElement xmlE { get; set; }
 
         #endregion
 
         public IkeCodeLog()
         {
-            xml = XDocument.Load(HostingEnvironment.ApplicationPhysicalPath + "\\Config\\IkeCodeLog.xml");
+            this.FileNamePrefix = "IkeCode_";
+            var path = HostingEnvironment.ApplicationPhysicalPath + "\\Config\\IkeCodeLog.config";
+
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException(string.Format("The file IkeCodeLog.config was not found on path {0}", path));
+            }
+
+            xml = XDocument.Load(path);
+            xmlE = XElement.Load(path);
         }
 
         public IkeCodeLog(string fileNamePrefix)
@@ -38,7 +49,7 @@ namespace IkeCode.Core.Log
 
             if (xml != null)
             {
-                element = (from item in xml.Root.Elements("default")
+                element = (from item in xml.Root.Elements("ikecode").Elements("default")
                            select item.Element(key)).FirstOrDefault();
 
             }
@@ -50,6 +61,8 @@ namespace IkeCode.Core.Log
             var name = string.Format("{0}{1}_{2}.txt", this.FileNamePrefix, DateTime.Today.ToString("yyyyMMdd"), fileName);
 
             var path = this.GetConfig("logPath");
+            if (string.IsNullOrWhiteSpace(path))
+                path = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "logs");
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
@@ -72,7 +85,7 @@ namespace IkeCode.Core.Log
 
             if (xml != null)
             {
-                var element = (from item in xml.Root.Elements(type)
+                var element = (from item in xml.Root.Elements("ikecode").Elements(type)
                                select item.Element("enabled")).FirstOrDefault();
 
                 if (element != null)
@@ -86,12 +99,31 @@ namespace IkeCode.Core.Log
 
         #region Public Methods
 
+        public void Metric(string methodName, Stopwatch stopWatch)
+        {
+            if (CheckIfEnabled("metric"))
+            {
+                var elapsed = stopWatch.Elapsed;
+                this.Write(string.Format("{0}: Time Elapsed -> {1:00}:{2:00}:{3:00}.{4:00}",
+                    methodName,
+                    elapsed.Hours,
+                    elapsed.Minutes,
+                    elapsed.Seconds,
+                    elapsed.Milliseconds / 10), "Metric");
+            }
+        }
+
         public void Verbose(string message)
         {
             if (CheckIfEnabled("verbose"))
             {
                 this.Write(message, "Verbose");
             }
+        }
+
+        public void Verbose(string methodName, string message)
+        {
+            this.Verbose(string.Format("{0}: {1}", methodName, message));
         }
 
         public void Exception(Exception exception)
@@ -103,12 +135,23 @@ namespace IkeCode.Core.Log
             }
         }
 
+        public void Exception(string methodName, Exception exception)
+        {
+            var message = string.Format("{0}: [{1}] -> StackTrace [{2}]", methodName, exception.Message, exception.StackTrace);
+            this.Exception(exception);
+        }
+
         public void Warning(string message)
         {
             if (CheckIfEnabled("warning"))
             {
                 this.Write(message, "Warning");
             }
+        }
+
+        public void Warning(string methodName, string message)
+        {
+            this.Warning(string.Format("{0}: {1}", methodName, message));
         }
 
         #endregion

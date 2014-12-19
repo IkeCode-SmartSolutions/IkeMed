@@ -15,9 +15,6 @@ namespace IkeMed.Model
 {
     public class NaturalPerson : BaseModel
     {
-        [Display(Name = "Tipo de Pessoa")]
-        public PersonTypeEnum PersonType { get; private set; }
-
         [Display(Name = "Sexo")]
         [Required]
         public GenderEnum Gender { get; set; }
@@ -40,7 +37,6 @@ namespace IkeMed.Model
         public NaturalPerson()
             : base()
         {
-            this.PersonType = PersonTypeEnum.Natural;
         }
 
         protected override void SetEntitiesState(IkeMedContext context)

@@ -14,7 +14,7 @@ using System.Web;
 
 namespace IkeMed.Model
 {
-    public class Person : BaseModel, IBaseModel
+    public class Person : BaseModel
     {
         [Required, MaxLength(250), Display(Name = "Nome")]
         public string Name { get; set; }
@@ -95,10 +95,34 @@ namespace IkeMed.Model
                     context.Entry(this.LegalPerson).State = this.LegalPerson.ID > 0 ? EntityState.Modified : EntityState.Added;
                 if (this.NaturalPerson != null)
                     context.Entry(this.NaturalPerson).State = this.NaturalPerson.ID > 0 ? EntityState.Modified : EntityState.Added;
+                
+                if (this.Documents != null && this.Documents.Count > 0)
+                {
+                    foreach (var doc in this.Documents)
+                    {
+                        context.Entry(doc).State = doc.ID > 0 ? EntityState.Modified : EntityState.Added;
+                    }
+                }
+
+                if (this.Phones != null && this.Phones.Count > 0)
+                {
+                    foreach (var phone in this.Phones)
+                    {
+                        context.Entry(phone).State = phone.ID > 0 ? EntityState.Modified : EntityState.Added;
+                    }
+                }
+
+                if (this.Addresses != null && this.Addresses.Count > 0)
+                {
+                    foreach (var address in this.Addresses)
+                    {
+                        context.Entry(address).State = address.ID > 0 ? EntityState.Modified : EntityState.Added;
+                    }
+                }
             }
         }
 
-        public int SaveChanges(IkeMedContext context)
+        public override int SaveChanges(IkeMedContext context)
         {
             this.SetEntitiesState(context);
             this.SaveImages();

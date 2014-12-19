@@ -8,6 +8,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IkeCode.Core.Log;
 
 namespace IkeMed.Model
 {
@@ -95,21 +96,22 @@ namespace IkeMed.Model
             {
                 foreach (var eve in e.EntityValidationErrors)
                 {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    IkeCodeLog.Default.Warning(string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State));
                     foreach (var ve in eve.ValidationErrors)
                     {
-                        Console.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+                        IkeCodeLog.Default.Warning(string.Format("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
                                             ve.PropertyName,
                                             eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
-                                            ve.ErrorMessage);
+                                            ve.ErrorMessage));
                     }
                 }
 
                 throw;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                IkeCodeLog.Default.Exception(e);
                 throw;
             }
 

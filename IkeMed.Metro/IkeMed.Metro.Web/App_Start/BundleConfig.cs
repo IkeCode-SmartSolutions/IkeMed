@@ -15,10 +15,14 @@ namespace IkeMed.Metro.Web
                     "~/Scripts/jquery.validate.js",
                     "~/Scripts/jquery.validate.unobtrusive.js",
                     "~/Scripts/jquery.unobtrusive-ajax.js",
-                    "~/Scripts/jquery.ext.js"));
+                    "~/Scripts/jquery.ext.js",
+                    "~/Scripts/jquery-ui-1.9.2.min.js",
+                    "~/Scripts/jtable/jquery.jtable.min.js"));
 
             var ikeMedBundle = new ScriptBundle("~/bundles/ikemed");
             ikeMedBundle.Include("~/Scripts/common.js");
+            ikeMedBundle.Include("~/Scripts/knockout-3.2.0.js");
+            ikeMedBundle.Include("~/Scripts/ko-notify.js");
             bundles.Add(ikeMedBundle);
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -40,7 +44,11 @@ namespace IkeMed.Metro.Web
                     "~/css/metro-bootstrap-responsive.css",
                     "~/css/metro-alert.css",
                     "~/css/metro-alert-theme-*",
-                    "~/css/common.css"));
+                    "~/css/metros-docs.css",
+                    "~/css/common.css",
+                    "~/Content/themes/base/jquery-ui.css",
+                    "~/Scripts/jtable/themes/metro/lightgray/jtable.min.css",
+                    "~/Scripts/jtable/themes/metro/jtable_metro_base.min.css"));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,6 +16,7 @@ namespace IkeMed.Model
         [MaxLength(50)]
         public string Name { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Document> Documents { get; set; }
 
         public DocumentType()

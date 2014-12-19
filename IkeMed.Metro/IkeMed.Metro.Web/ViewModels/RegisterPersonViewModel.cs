@@ -10,8 +10,7 @@ namespace IkeMed.Metro.Web.ViewModels
 {
     public class RegisterPersonViewModel : BaseViewModel
     {
-        public PersonTypeEnum PersonType { get; private set; }
-        public Person Person { get; private set; }
+        public Person Person { get; set; }
 
         public RegisterPersonViewModel()
             : base()
@@ -20,21 +19,16 @@ namespace IkeMed.Metro.Web.ViewModels
             this.Person.Doctor = this.Person.Doctor ?? new Doctor();
             this.Person.NaturalPerson = this.Person.NaturalPerson ?? new NaturalPerson();
             this.Person.LegalPerson = this.Person.LegalPerson ?? new LegalPerson();
-            this.PersonType = PersonTypeEnum.None;
+
+            this.Person.Phones = this.Person.Phones ?? new List<Phone>();
+            this.Person.Documents = this.Person.Documents ?? new List<Document>();
+            this.Person.Addresses = this.Person.Addresses ?? new List<Address>();
+
         }
 
-        public RegisterPersonViewModel(PersonTypeEnum personType)
+        public RegisterPersonViewModel(Person person)
             : this()
         {
-            this.PersonType = personType;
-        }
-
-        public void SetPerson(Person person)
-        {
-            person.Doctor = person.Doctor ?? new Doctor();
-            person.NaturalPerson = person.NaturalPerson ?? new NaturalPerson();
-            person.LegalPerson = person.LegalPerson ?? new LegalPerson();
-
             this.Person = person;
         }
     }

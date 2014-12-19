@@ -16,17 +16,6 @@ namespace IkeMed.Model.Migrations
 
         protected override void Seed(IkeMedContext context)
         {
-            //context.DocumentTypes.AddOrUpdate(
-            //    d => d.Name,
-            //    new DocumentType()
-            //    {
-            //        Name = "RG"
-            //    },
-            //    new DocumentType()
-            //    {
-            //        Name = "CPF"
-            //    });
-
             var person = new Person
             {
                 Name = "Leandro Barral",

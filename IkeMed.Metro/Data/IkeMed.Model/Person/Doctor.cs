@@ -15,9 +15,6 @@ namespace IkeMed.Model
 {
     public class Doctor : BaseModel
     {
-        [Display(Name = "Tipo de Pessoa")]
-        public PersonTypeEnum PersonType { get; private set; }
-
         [Display(Name = "Data de Admissão"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Required, DataType(DataType.Date)]
         [MinDate("01/01/1930", true)]
@@ -36,7 +33,6 @@ namespace IkeMed.Model
         public Doctor()
             : base()
         {
-            this.PersonType = PersonTypeEnum.Doctor;
         }
 
         protected override void SetEntitiesState(IkeMedContext context)

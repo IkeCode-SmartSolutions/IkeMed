@@ -14,6 +14,7 @@ using System.Web.Mvc;
 using System.Data.Entity.Migrations;
 using System.Data.Entity;
 using IkeCode;
+using Newtonsoft.Json;
 
 namespace IkeMed.Metro.Web.Controllers
 {
@@ -24,47 +25,64 @@ namespace IkeMed.Metro.Web.Controllers
         {
         }
 
-        public ActionResult Index(int id = 0, string personType = "")
+        public ActionResult Index(int id = 0)
         {
             var vm = new RegisterPersonViewModel();
-            if (!string.IsNullOrWhiteSpace(personType))
-            {
-                PersonTypeEnum type = personType.GetEnumRouteNameAttribute<PersonTypeEnum>();
-                vm = new RegisterPersonViewModel(type);
-            }
 
             base.SetPageTitle("Cadastro");
             base.SetPageSmallTitle("Pessoa");
 
             if (id > 0)
             {
-                using (var context = new IkeMedContext())
-                {
-                    var person = (from p in context.People
-                                  where p.ID == id
-                                  select p).FirstOrDefault();
 
-                    if (person != null)
+                this.Run<RegisterPersonViewModel>(string.Format("RegisterPersonController.Index(id={0})", id), () =>
+                {
+                    using (var context = new IkeMedContext())
                     {
-                        base.SetPageTitle("Editar");
-                        vm.SetPerson(person);
+                        var person = context.People
+                                        .Where(i => i.ID == id)
+                                        .Include(i => i.NaturalPerson)
+                                        .Include(i => i.LegalPerson)
+                                        .Include(i => i.Doctor)
+                                        .Include(i => i.Addresses)
+                                        .Include(i => i.Documents.Select(s => s.DocumentType))
+                                        .Include(i => i.Phones)
+                                        .FirstOrDefault();
+
+                        if (person != null)
+                        {
+                            base.SetPageTitle("Editar");
+                        }
+                        vm.Person = person;
                     }
-                }
+                    return vm;
+                });
             }
 
             return View(vm);
         }
 
         [HttpPost]
-        public ActionResult Post(Person person)
+        public ActionResult Post(RegisterPersonViewModel person)
         {
-            using (var context = new IkeMedContext())
-            {
-                person.SaveChanges(context);
-            }
+            base.SetPageTitle("Editar");
+            base.SetPageSmallTitle("Pessoa");
 
-            var vm = new RegisterPersonViewModel(PersonTypeEnum.Doctor);
-            vm.SetPerson(person);
+            var vm = new RegisterPersonViewModel();
+            this.Run<RegisterPersonViewModel>(string.Format("RegisterPersonController.Post(id={0})", person.Person.ID), () =>
+            {
+                //using (var context = new IkeMedContext())
+                //{
+                //    person.SaveChanges(context);
+                //}
+
+                //vm.Person = person;
+
+                return vm;
+            });
+
+            vm.Notify = new NotifyViewModel("Cadastro salvo com sucesso!");
+
             return View("Index", vm);
         }
     }

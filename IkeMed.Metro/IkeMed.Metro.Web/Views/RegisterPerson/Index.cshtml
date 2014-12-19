@@ -1,10 +1,11 @@
 ﻿@model RegisterPersonViewModel
+@using System.Linq
 @{
-    ViewBag.Title = string.Format("Cadastro -> {0}", Model.PersonType.GetDisplayName<PersonTypeEnum>());
+    ViewBag.Title = "Cadastro -> Pessoa";
 }
 
 @using (Html.BeginRouteForm("Post_RegisterPerson",
-                            new { id = Model.Person.ID },
+                            new { id = "_personForm" },
                             FormMethod.Post,
                             new { enctype = "multipart/form-data" }))
 {
@@ -33,123 +34,222 @@
         </div>
     </fieldset>
 
-    //if (Model.Person.Doctor != null && Model.Person.Doctor.ID > 0 || Model.PersonType == PersonTypeEnum.Doctor)
-    //{
-    <div class="grid fluid">
-        @Html.HiddenFor(m => m.Person.Doctor.ID)
-        <div class="row">
-            <div class="span12">
-                <div class="panel" data-role="panel">
-                    <div class="panel-header bg-dark fg-white">
-                        @Html.DisplayNameFor(m => m.Person.Doctor)
+    <div class="tab-control" data-role="tab-control" data-effect="fade[slide]">
+        <ul class="tabs">
+            <li class="active"><a href="#_naturalPerson">Pessoa Física</a></li>
+            <li><a href="#_doctor">Médico</a></li>
+            <li><a href="#_legalPerson">Pessoa Jurídica</a></li>
+        </ul>
+
+        <div class="frames">
+            <div class="frame" id="_naturalPerson">
+                <div class="panel-content" style="display: block;">
+                    @Html.HiddenFor(m => m.Person.NaturalPerson.ID)
+                    <div class="input-control switch" data-role="input-control">
+                        <label class="inline-block" style="margin-right: 20px">
+                            Ativo
+                            @Html.CheckBoxFor(m => m.Person.NaturalPerson.IsActive)
+                            <span class="check"></span>
+                        </label>
                     </div>
-                    <div class="panel-content" style="display: block;">
-                        <div class="input-control switch" data-role="input-control">
-                            <label class="inline-block" style="margin-right: 20px">
-                                Ativo
-                                @Html.CheckBoxFor(m => m.Person.Doctor.IsActive)
-                                <span class="check"></span>
-                            </label>
-                        </div>
 
-                        <div data-role-isactive="true">
-                            @Html.LabelFor(m => m.Person.Doctor.AdmissionDate)
-                            <div class="input-control text size4"
-                                 data-role="datepicker"
-                                 data-effect="fade">
-                                @Html.TextBoxFor(m => m.Person.Doctor.AdmissionDate, "{0:dd/MM/yyyy}")
-                                @Html.Partial("Widgets/_DatePicker")
-                                @Html.ValidationMessageFor(m => m.Person.Doctor.AdmissionDate)
-                            </div>
+                    <div data-role-isactive="true">
+                        @Html.LabelFor(m => m.Person.NaturalPerson.Birthdate)
+                        <div class="input-control text size4"
+                             data-role="datepicker"
+                             data-effect="fade">
+                            @Html.TextBoxFor(m => m.Person.NaturalPerson.Birthdate, "{0:dd/MM/yyyy}")
+                            @Html.Partial("Widgets/_DatePicker")
+                            @Html.ValidationMessageFor(m => m.Person.Doctor.AdmissionDate)
                         </div>
+                    </div>
 
-                        @Html.LabelFor(m => m.Person.Doctor.ProfileImage)
-                        <div class="clearfix">
-                            @Html.HiddenFor(m => m.Person.Doctor.ProfileImageUrl)
-                            @if (!string.IsNullOrWhiteSpace(Model.Person.Doctor.ProfileImageUrl))
-                            {
-                                <img src="@Model.Person.Doctor.ProfileImageUrl"
-                                     class="cycle"
-                                     alt="120x120" style="width: 120px; height: 120px;">
-                            }
-                            <div class="input-control file size8" data-role="input-control">
-                                @Html.TextBoxFor(m => m.Person.Doctor.ProfileImage, new { type = "file", accept = "image/*" })
-                                <button class="btn-file" type="button"></button>
-                            </div>
-                            @Html.ValidationMessageFor(m => m.Person.Doctor.ProfileImage)
+                    <div class="clearfix">
+                        <div class="input-control radio default-style inline-block" data-role="input-control">
+                            @Html.RadioButtonForEnum(m => m.Person.NaturalPerson.Gender)
                         </div>
+                        @Html.ValidationMessageFor(m => m.Person.NaturalPerson.Gender)
+                    </div>
+
+                    @Html.LabelFor(m => m.Person.NaturalPerson.ProfileImage)
+                    <div class="clearfix">
+                        @Html.HiddenFor(m => m.Person.NaturalPerson.ProfileImageUrl)
+                        @if (!string.IsNullOrWhiteSpace(Model.Person.NaturalPerson.ProfileImageUrl))
+                        {
+                            <img src="@Model.Person.NaturalPerson.ProfileImageUrl"
+                                 class="cycle"
+                                 alt="120x120" style="width: 120px; height: 120px;">
+                        }
+                        <div class="input-control file size8" data-role="input-control">
+                            @Html.TextBoxFor(m => m.Person.NaturalPerson.ProfileImage, new { type = "file", accept = "image/*" })
+                            <button class="btn-file" type="button"></button>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Person.NaturalPerson.ProfileImage)
+                    </div>
+                </div>
+            </div>
+            <div class="frame" id="_doctor">
+                @Html.HiddenFor(m => m.Person.Doctor.ID)
+                <div class="input-control switch" data-role="input-control">
+                    <label class="inline-block" style="margin-right: 20px">
+                        Ativo
+                        @Html.CheckBoxFor(m => m.Person.Doctor.IsActive)
+                        <span class="check"></span>
+                    </label>
+                </div>
+
+                <div data-role-isactive="true">
+                    @Html.LabelFor(m => m.Person.Doctor.AdmissionDate)
+                    <div class="input-control text size4"
+                         data-role="datepicker"
+                         data-effect="fade">
+                        @Html.TextBoxFor(m => m.Person.Doctor.AdmissionDate, "{0:dd/MM/yyyy}")
+                        @Html.Partial("Widgets/_DatePicker")
+                        @Html.ValidationMessageFor(m => m.Person.Doctor.AdmissionDate)
+                    </div>
+                </div>
+
+                @Html.LabelFor(m => m.Person.Doctor.ProfileImage)
+                <div class="clearfix">
+                    @Html.HiddenFor(m => m.Person.Doctor.ProfileImageUrl)
+                    @if (!string.IsNullOrWhiteSpace(Model.Person.Doctor.ProfileImageUrl))
+                    {
+                        <img src="@Model.Person.Doctor.ProfileImageUrl"
+                             class="cycle"
+                             alt="120x120" style="width: 120px; height: 120px;">
+                    }
+                    <div class="input-control file size8" data-role="input-control">
+                        @Html.TextBoxFor(m => m.Person.Doctor.ProfileImage, new { type = "file", accept = "image/*" })
+                        <button class="btn-file" type="button"></button>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.Person.Doctor.ProfileImage)
+                </div>
+            </div>
+            <div class="frame" id="_legalPerson">
+                @Html.HiddenFor(m => m.Person.LegalPerson.ID)
+                <div class="panel-content" style="display: block;">
+                    <div class="input-control switch" data-role="input-control">
+                        <label class="inline-block" style="margin-right: 20px">
+                            Ativo
+                            @Html.CheckBoxFor(m => m.Person.LegalPerson.IsActive)
+                            <span class="check"></span>
+                        </label>
+                    </div>
+
+                    @Html.LabelFor(m => m.Person.LegalPerson.CompanyName)
+                    <div class="input-control text size7" data-role="input-control">
+                        @Html.TextBoxFor(m => m.Person.LegalPerson.CompanyName, new { placeholder = "obrigatório" })
+                        @Html.ValidationMessageFor(m => m.Person.LegalPerson.CompanyName)
+                    </div>
+
+                    @Html.LabelFor(m => m.Person.LegalPerson.SocialName)
+                    <div class="input-control text size7" data-role="input-control">
+                        @Html.TextBoxFor(m => m.Person.LegalPerson.SocialName, new { placeholder = "obrigatório" })
+                        @Html.ValidationMessageFor(m => m.Person.LegalPerson.SocialName)
+                    </div>
+
+                    @Html.LabelFor(m => m.Person.LegalPerson.ProfileImage)
+                    <div class="clearfix">
+                        @Html.HiddenFor(m => m.Person.LegalPerson.ProfileImageUrl)
+                        @if (!string.IsNullOrWhiteSpace(Model.Person.LegalPerson.ProfileImageUrl))
+                        {
+                            <img src="@Model.Person.LegalPerson.ProfileImageUrl"
+                                 class="cycle"
+                                 alt="120x120" style="width: 120px; height: 120px;">
+                        }
+                        <div class="input-control file size8" data-role="input-control">
+                            @Html.TextBoxFor(m => m.Person.LegalPerson.ProfileImage, new { type = "file", accept = "image/*" })
+                            <button class="btn-file" type="button"></button>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Person.LegalPerson.ProfileImage)
                     </div>
                 </div>
             </div>
         </div>
     </div>
-                            //}
 
-                            //if (Model.Person.NaturalPerson != null && Model.Person.NaturalPerson.ID > 0 || Model.PersonType == PersonTypeEnum.Natural)
-                            //{
-                            <div class="grid fluid">
-                                @Html.HiddenFor(m => m.Person.NaturalPerson.ID)
-                                <div class="row">
-                                    <div class="span12">
-                                        <div class="panel" data-role="panel">
-                                            <div class="panel-header bg-dark fg-white">
-                                                @Html.DisplayNameFor(m => m.Person.NaturalPerson)
-                                            </div>
-                                            <div class="panel-content" style="display: block;">
-                                                <div class="input-control switch" data-role="input-control">
-                                                    <label class="inline-block" style="margin-right: 20px">
-                                                        Ativo
-                                                        @Html.CheckBoxFor(m => m.Person.NaturalPerson.IsActive)
-                                                        <span class="check"></span>
-                                                    </label>
-                                                </div>
-
-                                                <div data-role-isactive="true">
-                                                    @Html.LabelFor(m => m.Person.NaturalPerson.Birthdate)
-                                                    <div class="input-control text size4"
-                                                         data-role="datepicker"
-                                                         data-effect="fade">
-                                                        @Html.TextBoxFor(m => m.Person.NaturalPerson.Birthdate, "{0:dd/MM/yyyy}")
-                                                        @Html.Partial("Widgets/_DatePicker")
-                                                        @Html.ValidationMessageFor(m => m.Person.Doctor.AdmissionDate)
-                                                    </div>
-                                                </div>
-
-                                                <div class="clearfix">
-                                                    <div class="input-control radio default-style inline-block" data-role="input-control">
-                                                        @Html.RadioButtonForEnum(m => m.Person.NaturalPerson.Gender)
-                                                    </div>
-                                                    @Html.ValidationMessageFor(m => m.Person.NaturalPerson.Gender)
-                                                </div>
-
-                                                @Html.LabelFor(m => m.Person.NaturalPerson.ProfileImage)
-                                                <div class="clearfix">
-                                                    @Html.HiddenFor(m => m.Person.NaturalPerson.ProfileImageUrl)
-                                                    @if (!string.IsNullOrWhiteSpace(Model.Person.NaturalPerson.ProfileImageUrl))
-                                                    {
-                                                        <img src="@Model.Person.NaturalPerson.ProfileImageUrl"
-                                                             class="cycle"
-                                                             alt="120x120" style="width: 120px; height: 120px;">
-                                                    }
-                                                    <div class="input-control file size8" data-role="input-control">
-                                                        @Html.TextBoxFor(m => m.Person.NaturalPerson.ProfileImage, new { type = "file", accept = "image/*" })
-                                                        <button class="btn-file" type="button"></button>
-                                                    </div>
-                                                    @Html.ValidationMessageFor(m => m.Person.NaturalPerson.ProfileImage)
-                                                </div>
-                                            </div>
+    <div class="tab-control" data-role="tab-control" data-effect="fade[slide]">
+        <ul class="tabs">
+            <li><a href="#_addresses">Endereços</a></li>
+            <li class="active"><a href="#_phones">Telefones</a></li>
+            <li><a href="#_documents">Documentos</a></li>
+        </ul>
+        <div class="frames">
+            <div class="frame" id="_phones">
+                <div class="listview-outlook" data-role="listview">
+                    @foreach (var groupedPhones in Model.Person.Phones.GroupBy(i => i.PhoneType).ToList())
+                    {
+                        <div class="list-group collapsed">
+                            <a href="" class="group-title">@Html.PureTextDisplayForEnum(m => groupedPhones.Key)</a>
+                            <div class="group-content">
+                                @*<a class="list marked" href="#">
+                                        <div class="list-content">
+                                            <span class="list-title">subscribe@metroui.net</span>
+                                            <span class="list-subtitle">MetroUI: News on 26/10/2013</span>
+                                            <span class="list-remark">Hello friend! Newest for Metro UI CSS</span>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @*}*@
+                                    </a>*@
 
-                            <div class="pull-right">
-                                <input type="reset" class="button large" value="Limpar" />
-                                <input type="reset" class="button large danger" value="Apagar" />
-                                <input type="submit" class="button large success" value="Salvar" />
+                                <a class="list marked" href="#">
+                                    <div class="list-content">
+                                        @foreach (var phone in groupedPhones)
+                                        {
+                                            <span class="list-title">
+                                                <span class="place-right icon-cancel-2 smaller"></span>
+                                                <span class="place-right icon-pencil smaller"></span>
+                                                @phone.Number
+                                            </span>
+                                        }
+                                    </div>
+                                </a>
+
                             </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="frame" id="_documents">
+                <div class="listview-outlook" data-role="listview">
+                    @foreach (var groupedDocs in Model.Person.Documents.GroupBy(i => i.DocumentType.Name).OrderBy(o => o.Key).ToList())
+                    {
+                        <div class="list-group collapsed">
+                            <a href="" class="group-title">@groupedDocs.Key</a>
+                            <div class="group-content">
+                                @foreach (var document in groupedDocs)
+                                {
+                                    <a class="list marked" href="#">
+                                        <div class="list-content">
+
+                                            <span class="list-title">@document.Value</span>
+
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            
+            <div class="frame" id="_addresses">
+                <div id="addessesContainer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pull-right">
+        <input type="reset" class="button large" value="Limpar" />
+        <input type="reset" class="button large danger" value="Apagar" />
+        <input type="submit" class="button large success" value="Salvar" />
+    </div>
 }
 @section scripts{
     <script type="text/javascript" src="~/Scripts/ViewModels/RegisterPerson.js"></script>
+    <script type="text/javascript">
+        registerPerson.addresses(@Html.Raw(Model.Person.Addresses.Serialize()));
+</script>
+    <script type="text/javascript">
+        //koNotify.config('@Html.Raw(Model.NotifySerialized)');
+    </script>
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,9 +15,11 @@ namespace IkeMed.Model
         [Required]
         [MaxLength(30)]
         public string Value { get; set; }
-        
-        public DocumentType DocumentType { get; set; }
-        
+
+        //[JsonIgnore]
+        public virtual DocumentType DocumentType { get; set; }
+
+        [JsonIgnore]
         public virtual Person Person { get; set; }
 
         public Document()
@@ -31,6 +34,10 @@ namespace IkeMed.Model
                 context.Entry(this).State = this.ID > 0 ? EntityState.Modified : EntityState.Added;
                 if (this.Person != null)
                     context.Entry(this.Person).State = this.Person != null && this.Person.ID > 0
+                                                            ? EntityState.Modified : EntityState.Added;
+
+                if (this.DocumentType != null)
+                    context.Entry(this.DocumentType).State = this.DocumentType != null && this.DocumentType.ID > 0
                                                             ? EntityState.Modified : EntityState.Added;
             }
         }

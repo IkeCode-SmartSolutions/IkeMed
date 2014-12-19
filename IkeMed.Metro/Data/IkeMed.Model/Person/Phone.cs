@@ -1,4 +1,5 @@
 ﻿using IkeMed.Model.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,6 +22,7 @@ namespace IkeMed.Model
         [Display(Name = "Tipo de Telefone")]
         public PhoneTypeEnum PhoneType { get; set; }
 
+        [JsonIgnore]
         [Display(Name = "Pessoa")]
         public virtual Person Person { get; set; }
 

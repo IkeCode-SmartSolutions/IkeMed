@@ -1,5 +1,7 @@
 ﻿function Common() {
-    this.init = function () {
+    var self = this;
+
+    self.init = function () {
         $(document).ready(function () {
             //fix to input file validation
             $.validator.addMethod('accept', function () { return true; });

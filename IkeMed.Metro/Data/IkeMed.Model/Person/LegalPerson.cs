@@ -13,9 +13,6 @@ namespace IkeMed.Model
 {
     public class LegalPerson : BaseModel
     {
-        [Display(Name = "Tipo de Pessoa")]
-        public PersonTypeEnum PersonType { get; private set; }
-
         [Required]
         [Display(Name = "Nome Fantasia"), MaxLength(250)]
         public string SocialName { get; set; }
@@ -37,7 +34,6 @@ namespace IkeMed.Model
         public LegalPerson()
             : base()
         {
-            this.PersonType = PersonTypeEnum.Legal;
         }
 
         protected override void SetEntitiesState(IkeMedContext context)
