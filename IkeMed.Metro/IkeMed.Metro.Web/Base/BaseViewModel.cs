@@ -9,9 +9,8 @@ namespace IkeMed.Metro.Web.Base
 {
     public class BaseViewModel
     {
-        public NotifyViewModel Notify { private get; set; }
-        public string NotifySerialized { get { return JsonConvert.SerializeObject(this.Notify); } }
-
+        public NotifyViewModel Notify { get; set; }
+        
         public BaseViewModel()
         {
             this.Notify = new NotifyViewModel();

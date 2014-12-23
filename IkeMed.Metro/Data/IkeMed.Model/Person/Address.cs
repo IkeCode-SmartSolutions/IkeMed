@@ -58,8 +58,7 @@ namespace IkeMed.Model
             {
                 context.Entry(this).State = this.ID > 0 ? EntityState.Modified : EntityState.Added;
                 if (this.Person != null)
-                    context.Entry(this.Person).State = this.Person != null && this.Person.ID > 0
-                                                            ? EntityState.Modified : EntityState.Added;
+                    context.Entry(this.Person).State = this.Person.ID > 0 ? EntityState.Modified : EntityState.Added;
             }
         }
     }

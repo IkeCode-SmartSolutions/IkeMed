@@ -1,18 +1,19 @@
-﻿@model RegisterPersonViewModel
+﻿@model PersonViewModel
 @using System.Linq
 @{
     ViewBag.Title = "Cadastro -> Pessoa";
 }
 
-@using (Html.BeginRouteForm("Post_RegisterPerson",
-                            new { id = "_personForm" },
+@using (Html.BeginRouteForm("Post_Person",
                             FormMethod.Post,
-                            new { enctype = "multipart/form-data" }))
+                            new { enctype = "multipart/form-data", id = "_personForm" }))
 {
     Html.AntiForgeryToken();
     <fieldset>
         <legend>Geral</legend>
         @Html.HiddenFor(m => m.Person.ID)
+        @Html.HiddenFor(m => m.Person.DateIns)
+        @Html.HiddenFor(m => m.Person.LastUpdate)
         <div class="input-control switch" data-role="input-control">
             <label class="inline-block" style="margin-right: 20px">
                 Ativo
@@ -170,67 +171,12 @@
 
     <div class="tab-control" data-role="tab-control" data-effect="fade[slide]">
         <ul class="tabs">
-            <li><a href="#_addresses">Endereços</a></li>
-            <li class="active"><a href="#_phones">Telefones</a></li>
+            <li class="active"><a href="#_addresses">Endereços</a></li>
+            <li><a href="#_phones">Telefones</a></li>
             <li><a href="#_documents">Documentos</a></li>
         </ul>
         <div class="frames">
-            <div class="frame" id="_phones">
-                <div class="listview-outlook" data-role="listview">
-                    @foreach (var groupedPhones in Model.Person.Phones.GroupBy(i => i.PhoneType).ToList())
-                    {
-                        <div class="list-group collapsed">
-                            <a href="" class="group-title">@Html.PureTextDisplayForEnum(m => groupedPhones.Key)</a>
-                            <div class="group-content">
-                                @*<a class="list marked" href="#">
-                                        <div class="list-content">
-                                            <span class="list-title">subscribe@metroui.net</span>
-                                            <span class="list-subtitle">MetroUI: News on 26/10/2013</span>
-                                            <span class="list-remark">Hello friend! Newest for Metro UI CSS</span>
-                                        </div>
-                                    </a>*@
 
-                                <a class="list marked" href="#">
-                                    <div class="list-content">
-                                        @foreach (var phone in groupedPhones)
-                                        {
-                                            <span class="list-title">
-                                                <span class="place-right icon-cancel-2 smaller"></span>
-                                                <span class="place-right icon-pencil smaller"></span>
-                                                @phone.Number
-                                            </span>
-                                        }
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="frame" id="_documents">
-                <div class="listview-outlook" data-role="listview">
-                    @foreach (var groupedDocs in Model.Person.Documents.GroupBy(i => i.DocumentType.Name).OrderBy(o => o.Key).ToList())
-                    {
-                        <div class="list-group collapsed">
-                            <a href="" class="group-title">@groupedDocs.Key</a>
-                            <div class="group-content">
-                                @foreach (var document in groupedDocs)
-                                {
-                                    <a class="list marked" href="#">
-                                        <div class="list-content">
-
-                                            <span class="list-title">@document.Value</span>
-
-                                        </div>
-                                    </a>
-                                }
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-            
             <div class="frame" id="_addresses">
                 <div id="addessesContainer">
                 </div>
@@ -245,11 +191,11 @@
     </div>
 }
 @section scripts{
-    <script type="text/javascript" src="~/Scripts/ViewModels/RegisterPerson.js"></script>
+    <script type="text/javascript" src="~/Scripts/ViewModels/Person.js"></script>
     <script type="text/javascript">
-        registerPerson.addresses(@Html.Raw(Model.Person.Addresses.Serialize()));
-</script>
+        person.addresses(@Html.Raw(Model.Person.Addresses.Serialize()));
+    </script>
     <script type="text/javascript">
-        //koNotify.config('@Html.Raw(Model.NotifySerialized)');
+        ikeNotify.show('@Html.Raw(Model.Notify.Serialize())');
     </script>
 }

@@ -73,6 +73,29 @@ namespace IkeMed.Metro.Web.Base
 
         #endregion Header Title
 
+        protected void Run(string methodName, Action runner)
+        {
+            var timeElapsed = new Stopwatch();
+
+            try
+            {
+                timeElapsed.Start();
+
+                runner();
+
+                timeElapsed.Stop();
+            }
+            catch (Exception ex)
+            {
+                IkeCodeLog.Default.Exception(methodName, ex);
+                throw;
+            }
+            finally
+            {
+                IkeCodeLog.Default.Metric(methodName, timeElapsed);
+            }
+        }
+
         protected T Run<T>(string methodName, Func<T> runner)
         {
             var timeElapsed = new Stopwatch();

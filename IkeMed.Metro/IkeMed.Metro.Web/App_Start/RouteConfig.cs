@@ -14,20 +14,20 @@ namespace IkeMed.Metro.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "RegisterPerson",
+                name: "Person",
                 url: "cadastro/pessoa/{id}",
                 defaults: new
                 {
-                    controller = "RegisterPerson",
+                    controller = "Person",
                     action = "Index",
                     id = UrlParameter.Optional
                 }
             );
 
             routes.MapRoute(
-                name: "Post_RegisterPerson",
+                name: "Post_Person",
                 url: "salvar/pessoa/{id}",
-                defaults: new { controller = "RegisterPerson", action = "Post" }
+                defaults: new { controller = "Person", action = "Post" }
             );
 
             routes.MapRoute(

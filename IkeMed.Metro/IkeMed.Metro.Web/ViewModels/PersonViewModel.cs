@@ -8,11 +8,11 @@ using System.Web;
 
 namespace IkeMed.Metro.Web.ViewModels
 {
-    public class RegisterPersonViewModel : BaseViewModel
+    public class PersonViewModel : BaseViewModel
     {
         public Person Person { get; set; }
 
-        public RegisterPersonViewModel()
+        public PersonViewModel()
             : base()
         {
             this.Person = new Person();
@@ -26,7 +26,7 @@ namespace IkeMed.Metro.Web.ViewModels
 
         }
 
-        public RegisterPersonViewModel(Person person)
+        public PersonViewModel(Person person)
             : this()
         {
             this.Person = person;

@@ -108,7 +108,7 @@ namespace System.Web.Mvc.Html
 
         public static string Serialize(this object obj)
         {
-            return JsonConvert.SerializeObject(obj, new JsonSerializerSettings() { Formatting = Formatting.Indented, NullValueHandling = NullValueHandling.Ignore });
+            return JsonConvert.SerializeObject(obj, new JsonSerializerSettings() { Formatting = Formatting.None, NullValueHandling = NullValueHandling.Ignore });
         }
     }
 }

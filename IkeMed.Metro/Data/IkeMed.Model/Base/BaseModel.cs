@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Data.Entity.Migrations.Model;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace IkeMed.Model
 
         protected virtual void SetEntitiesState(IkeMedContext context)
         {
-        
+
         }
 
 
@@ -41,5 +42,30 @@ namespace IkeMed.Model
         }
 
         #endregion Common Methods
+    }
+
+    public static class ModelHelpers
+    {
+        public static T Find<T>(this DbSet<T> obj, int id, string[] includes = null)
+            where T : class, IBaseModel, new ()
+        {
+            if (id > 0)
+            {
+                var res = obj
+                    .First(i => i.ID == id);
+
+                //if (includes != null)
+                //{
+                //    foreach (var include in includes)
+                //    {
+                //        res = obj.Include(include);
+                //    }
+                //}
+
+                return res;
+            }
+
+            return new T();
+        }
     }
 }

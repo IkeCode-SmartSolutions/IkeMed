@@ -19,6 +19,16 @@ namespace IkeMed.Metro.Web.ViewModels
         public int interval { get; private set; }
         public bool close { get; private set; }
 
+        /// <summary>
+        /// Model for Notify
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <param name="type">alert or notification</param>
+        /// <param name="theme">blue, dark, green and orange</param>
+        /// <param name="position">topleft, bottomleft, bottomright, bottomcenter, topcenter, center</param>
+        /// <param name="interval"></param>
+        /// <param name="close"></param>
         public NotifyViewModel(string message = "",
             string title = "", 
             string type = "notification", 

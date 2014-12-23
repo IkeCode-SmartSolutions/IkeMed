@@ -26,7 +26,7 @@ namespace IkeMed.Model
         public IkeMedContext()
             : base("IkeMed")
         {
-
+            //this.Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

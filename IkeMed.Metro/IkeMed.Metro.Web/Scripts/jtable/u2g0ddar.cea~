@@ -2277,7 +2277,6 @@ THE SOFTWARE.
                         isNewRow: true
                     });
                 self._$addRecordDiv.dialog("close");
-                $.notification({ message: 'Registro adicionado com sucesso!', theme: 'green', position: 'topcenter' });
             };
 
             $addRecordForm.data('submitting', true); //TODO: Why it's used, can remove? Check it.
@@ -2689,7 +2688,6 @@ THE SOFTWARE.
                 }
 
                 self._$editDiv.dialog("close");
-                $.notification({ message: 'Registro atualizado com sucesso!', theme: 'green', position: 'topcenter' });
             };
 
 

@@ -17,7 +17,6 @@ namespace IkeCode.Core.Log
         public string FileNamePrefix { get; private set; }
         public static IkeCodeLog Default { get { return new IkeCodeLog(); } }
         private XDocument xml { get; set; }
-        private XElement xmlE { get; set; }
 
         #endregion
 
@@ -32,7 +31,6 @@ namespace IkeCode.Core.Log
             }
 
             xml = XDocument.Load(path);
-            xmlE = XElement.Load(path);
         }
 
         public IkeCodeLog(string fileNamePrefix)

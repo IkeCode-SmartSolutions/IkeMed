@@ -130,14 +130,14 @@
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\GeneralConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RegisterPersonController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\NotifyViewModel.cs" />
-    <Compile Include="ViewModels\RegisterPersonViewModel.cs" />
+    <Compile Include="ViewModels\PersonViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\IkeCodeLog.config">
@@ -410,9 +410,9 @@
     <Content Include="Scripts\jtable\themes\metro\red\loading.gif" />
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
-    <Content Include="Scripts\ko-notify.js" />
+    <Content Include="Scripts\ikeNotify.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
-    <Content Include="Scripts\ViewModels\RegisterPerson.js" />
+    <Content Include="Scripts\ViewModels\Person.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -430,7 +430,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\RegisterPerson\Index.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Shared\Widgets\_DatePicker.cshtml" />
     <Content Include="Scripts\jquery.ext.js" />
     <Content Include="Scripts\jtable\themes\metro\red\jtable.less" />
