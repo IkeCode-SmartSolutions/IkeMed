@@ -171,14 +171,21 @@
 
     <div class="tab-control" data-role="tab-control" data-effect="fade[slide]">
         <ul class="tabs">
-            <li class="active"><a href="#_addresses">Endereços</a></li>
-            <li><a href="#_phones">Telefones</a></li>
+            <li class="active"><a href="#_phones">Telefones</a></li>
+            <li><a href="#_addresses">Endereços</a></li>            
             <li><a href="#_documents">Documentos</a></li>
         </ul>
         <div class="frames">
-
+            <div class="frame" id="_phones">
+                <div id="phonesContainer">
+                </div>
+            </div>
             <div class="frame" id="_addresses">
                 <div id="addessesContainer">
+                </div>
+            </div>
+            <div class="frame" id="_documents">
+                <div id="documentsContainer">
                 </div>
             </div>
         </div>
@@ -194,6 +201,8 @@
     <script type="text/javascript" src="~/Scripts/ViewModels/Person.js"></script>
     <script type="text/javascript">
         person.addresses(@Html.Raw(Model.Person.Addresses.Serialize()));
+        person.phones(@Html.Raw(Model.Person.Phones.Serialize()));
+        person.documents(@Html.Raw(Model.Person.Documents.Serialize()));
     </script>
     <script type="text/javascript">
         ikeNotify.show('@Html.Raw(Model.Notify.Serialize())');

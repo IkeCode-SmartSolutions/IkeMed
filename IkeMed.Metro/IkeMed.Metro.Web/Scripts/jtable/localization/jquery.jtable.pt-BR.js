@@ -6,12 +6,12 @@
 
     $.extend(true, $.hik.jtable.prototype.options.messages, {
         serverCommunicationError: 'Erro ao tentar conexão com o servidor.',
-        loadingMessage: 'Carregando registros...',
-        noDataAvailable: 'Não existem dados a serem exibidos no momento!',
-        addNewRecord: '+ Adicionar novo registro',
-        editRecord: 'Editar registro',
+        loadingMessage: 'Carregando...',
+        noDataAvailable: 'Não existem dados a serem exibidos no momento...',
+        addNewRecord: 'Novo',
+        editRecord: 'Editar',
         areYouSure: 'Você tem certeza ?',
-        deleteConfirmation: 'Este registro será excluído. Confirmar ?',
+        deleteConfirmation: 'Este registro será excluído. Confirmar?',
         save: 'Salvar',
         saving: 'Salvando...',
         cancel: 'Cancelar',
@@ -20,9 +20,9 @@
         error: 'Erro',
         close: 'Fechar',
         cannotLoadOptionsFor: 'Não foi possível carregar opções para o campo {0}!',
-        pagingInfo: 'Exibindo registros {0} a {1} de {2}',
-        canNotDeletedRecords: 'Não foi possível excluir registro(s) {0} de {1}!',
-        deleteProggress: 'Excluindo {0} de {1} registros, processando...',
+        pagingInfo: 'Exibindo {0} a {1} de {2}',
+        canNotDeletedRecords: 'Não foi possível excluir o(s) registro(s) {0} de {1}!',
+        deleteProggress: 'Excluindo {0} de {1}, processando...',
         pageSizeChangeLabel: 'Linhas',
         gotoPageLabel: 'Ir para página'
     });

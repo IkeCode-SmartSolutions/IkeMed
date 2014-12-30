@@ -1705,6 +1705,7 @@ THE SOFTWARE.
             var $select = $('<select class="' + field.inputClass + '" id="Edit-' + fieldName + '" name="' + fieldName + '"></select>')
                 .appendTo($containerDiv);
 
+            //console.log('_createDropDownListForField.record', record);
             //add options
             var options = this._getOptionsForField(fieldName, {
                 record: record,
@@ -1721,9 +1722,16 @@ THE SOFTWARE.
         /* Fills a dropdown list with given options.
         *************************************************************************/
         _fillDropDownListWithOptions: function ($select, options, value) {
+            //console.log("_fillDropDownListWithOptions.$select", $select);
+            //console.log("_fillDropDownListWithOptions.options", options);
+            //console.log("_fillDropDownListWithOptions.value", value);
+            //console.log("_fillDropDownListWithOptions.typeof value", typeof value)
             $select.empty();
+            var parsedValue = typeof value === 'number' ? value : value.ID;
+            //console.log("_fillDropDownListWithOptions.parsedValue", parsedValue)
+
             for (var i = 0; i < options.length; i++) {
-                $('<option' + (options[i].Value == value ? ' selected="selected"' : '') + '>' + options[i].DisplayText + '</option>')
+                $('<option' + (options[i].Value == parsedValue ? ' selected="selected"' : '') + '>' + options[i].DisplayText + '</option>')
                     .val(options[i].Value)
                     .appendTo($select);
             }
@@ -2881,7 +2889,6 @@ THE SOFTWARE.
                             id: 'DeleteDialogButton',
                             text: self.options.messages.deleteText,
                             click: function () {
-
                                 //row maybe removed by another source, if so, do nothing
                                 if (self._$deletingRow.hasClass('jtable-row-removed')) {
                                     self._$deleteRecordDiv.dialog('close');
@@ -2895,6 +2902,7 @@ THE SOFTWARE.
                                     function () {
                                         self._removeRowsFromTableWithAnimation(self._$deletingRow);
                                         self._$deleteRecordDiv.dialog('close');
+                                        $.notification({ message: 'Registro excluído com sucesso!', theme: 'green', position: 'topcenter' });
                                     },
                                     function (message) { //error
                                         self._showError(message);

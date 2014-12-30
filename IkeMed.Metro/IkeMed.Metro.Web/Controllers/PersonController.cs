@@ -15,6 +15,7 @@ using System.Data.Entity.Migrations;
 using System.Data.Entity;
 using IkeCode;
 using Newtonsoft.Json;
+using IkeMed.Metro.Web.Models;
 
 namespace IkeMed.Metro.Web.Controllers
 {
@@ -112,6 +113,55 @@ namespace IkeMed.Metro.Web.Controllers
         public JsonResult DeleteAddress(int id)
         {
             return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult UpdatePhone(Phone phone)
+        {
+            return Json(new { Result = "OK", Record = phone }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult CreatePhone(Phone phone)
+        {
+            return Json(new { Result = "OK", Record = phone }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeletePhone(int id)
+        {
+            return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateDocument(Document document)
+        {
+            return Json(new { Result = "OK", Record = document }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult CreateDocument(Document document)
+        {
+            return Json(new { Result = "OK", Record = document }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteDocument(int id)
+        {
+            return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDocumentTypes()
+        {
+            using (var context = new IkeMedContext())
+            {
+                var docTypes = context.DocumentTypes.ToList();
+                var result = new Dictionary<string, object>(docTypes.Count);
+                foreach (var doc in docTypes)
+                {
+                    result.Add(doc.Name, doc.ID);
+                }
+                
+                return Json(new { Result = "OK", Options = JTableOptionModel.GetModelList(result) }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

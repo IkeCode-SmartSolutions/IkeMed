@@ -21,11 +21,11 @@ namespace IkeMed.Model
         public DateTime LastUpdate { get; set; }
 
         [Display(Name = "Ativo")]
+        [DefaultValue(false)]
         public bool IsActive { get; set; }
 
         public BaseModel()
         {
-            this.IsActive = true;
         }
 
         #region Common Methods
@@ -42,30 +42,5 @@ namespace IkeMed.Model
         }
 
         #endregion Common Methods
-    }
-
-    public static class ModelHelpers
-    {
-        public static T Find<T>(this DbSet<T> obj, int id, string[] includes = null)
-            where T : class, IBaseModel, new ()
-        {
-            if (id > 0)
-            {
-                var res = obj
-                    .First(i => i.ID == id);
-
-                //if (includes != null)
-                //{
-                //    foreach (var include in includes)
-                //    {
-                //        res = obj.Include(include);
-                //    }
-                //}
-
-                return res;
-            }
-
-            return new T();
-        }
     }
 }
