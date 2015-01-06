@@ -17,7 +17,7 @@ namespace IkeMed.Model
         [Display(Name = "Tipo de Pessoa")]
         public PersonTypeEnum PersonType { get; private set; }
 
-        [Display(Name = "Data de Admissão"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Data de Admissão")]
         [Required, DataType(DataType.Date)]
         public DateTime AdmissionDate { get; set; }
 

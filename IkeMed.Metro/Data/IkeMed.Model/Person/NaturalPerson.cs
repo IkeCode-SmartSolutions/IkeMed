@@ -21,7 +21,7 @@ namespace IkeMed.Model
         [Required]
         public GenderEnum Gender { get; set; }
 
-        [Display(Name = "Data de Aniversário"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Data de Aniversário")]
         [Required, DataType(DataType.Date)]
         public DateTime Birthdate { get; set; }
 
