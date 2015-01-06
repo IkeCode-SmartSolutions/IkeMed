@@ -53,8 +53,7 @@ namespace IkeMed.Metro.Web
             styleBundle.Include("~/css/metros-docs.css");
             styleBundle.Include("~/css/common.css");
             styleBundle.Include("~/Content/themes/base/jquery-ui.css");
-            //styleBundle.Include("~/Scripts/jtable/themes/metro/jtable_metro_base.min.css");
-            styleBundle.Include("~/Scripts/jtable/themes/metro/lightgray/jtable.min.css");
+            styleBundle.Include("~/Scripts/jtable/themes/metro/lightgray/jtable.css");
             bundles.Add(styleBundle);
         }
     }
