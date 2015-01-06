@@ -15,7 +15,7 @@ namespace IkeCode.Core.CustomAttributes.Helpers
         {
             var fieldInfo = value.GetType().GetField(value.ToString());
             var descriptionAttributes = fieldInfo.GetCustomAttributes<DisplayAttribute>(false) as DisplayAttribute[];
-
+            
             if (descriptionAttributes == null) return string.Empty;
             return (descriptionAttributes.Length > 0) ? descriptionAttributes[0].Name : value.ToString();
         }

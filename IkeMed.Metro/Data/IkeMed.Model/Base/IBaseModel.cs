@@ -8,6 +8,11 @@ namespace IkeMed.Model
 {
     public interface IBaseModel
     {
-        void SetEntitiesState(IkeMedContext context);
+        int ID { get; set; }
+        DateTime DateIns { get; set; }
+        DateTime LastUpdate { get; set; }
+        bool IsActive { get; set; }
+
+        int SaveChanges(IkeMedContext context);
     }
 }

@@ -1,5 +1,7 @@
 IkeMed.Metro/packages/
 IkeMed.Metro.rar
 IkeMed.Metro/IkeMed.Metro.Web/Uploads/ProfileImages/*.*
-*/bin
-IkeMed.Metro/Core/IkeCode.Core/bin/
+bin
+obj
+*.suo
+*.user

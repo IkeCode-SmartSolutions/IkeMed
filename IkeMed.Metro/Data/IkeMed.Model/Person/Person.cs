@@ -14,7 +14,7 @@ using System.Web;
 
 namespace IkeMed.Model
 {
-    public class Person : BaseModel, IBaseModel
+    public class Person : BaseModel
     {
         [Required, MaxLength(250), Display(Name = "Nome")]
         public string Name { get; set; }
@@ -44,10 +44,10 @@ namespace IkeMed.Model
         public Person()
             : base()
         {
-
+            this.IsActive = true;
         }
 
-        public void SaveImages()
+        private void SaveImages()
         {
             var config = new IkeCodeConfig("General.xml", "default");
             var path = config.GetString("uploadPath");
@@ -85,7 +85,7 @@ namespace IkeMed.Model
             }
         }
 
-        public void SetEntitiesState(IkeMedContext context)
+        protected override void SetEntitiesState(IkeMedContext context)
         {
             if (this != null)
             {
@@ -97,6 +97,14 @@ namespace IkeMed.Model
                 if (this.NaturalPerson != null)
                     context.Entry(this.NaturalPerson).State = this.NaturalPerson.ID > 0 ? EntityState.Modified : EntityState.Added;
             }
+        }
+
+        public override int SaveChanges(IkeMedContext context)
+        {
+            this.SetEntitiesState(context);
+            this.SaveImages();
+
+            return context.SaveChanges();
         }
     }
 }

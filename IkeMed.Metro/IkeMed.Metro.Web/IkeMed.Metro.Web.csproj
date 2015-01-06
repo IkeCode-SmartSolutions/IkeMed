@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IkeMed.Metro.Web</RootNamespace>
     <AssemblyName>IkeMed.Metro.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -22,6 +22,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,14 +62,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -97,9 +98,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -114,6 +113,7 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -129,18 +130,59 @@
     <Compile Include="Base\BaseController.cs" />
     <Compile Include="Base\BaseViewModel.cs" />
     <Compile Include="Base\GeneralConfig.cs" />
+    <Compile Include="Controllers\HelpersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RegisterPersonController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\JTableOptionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\RegisterPersonViewModel.cs" />
+    <Compile Include="ViewModels\NotifyViewModel.cs" />
+    <Compile Include="ViewModels\PersonViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\IkeCodeLog.xml" />
+    <None Include="Config\IkeCodeLog.config">
+      <SubType>Designer</SubType>
+      <TransformOnBuild>true</TransformOnBuild>
+    </None>
     <Content Include="Config\General.xml" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_525252_0.png" />
+    <Content Include="Content\themes\base\images\ui-icons_707070_0.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_d4d4d4_0.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_0.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
     <Content Include="css\common.css" />
     <Content Include="css\iconFont.min.css" />
     <Content Include="css\metro-alert-theme-green.css" />
@@ -152,6 +194,7 @@
     <Content Include="css\metro-bootstrap-responsive.min.css" />
     <Content Include="css\metro-bootstrap.css" />
     <Content Include="css\metro-bootstrap.min.css" />
+    <Content Include="css\metros-docs.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\iconFont.dev.svg" />
     <Content Include="fonts\iconFont.svg" />
@@ -207,20 +250,76 @@
     <Content Include="fonts\iconFont.ttf" />
     <Content Include="fonts\iconFont.json" />
     <Content Include="fonts\iconFont.eot" />
+    <None Include="Config\IkeCodeLog.Debug.config">
+      <DependentUpon>IkeCodeLog.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Config\IkeCodeLog.Release.config">
+      <DependentUpon>IkeCodeLog.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\IkeMed-FileSystem.pubxml" />
     <None Include="Properties\PublishProfiles\IkeMed-GoDaddy.pubxml" />
+    <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.9.2.js" />
+    <Content Include="Scripts\jquery-ui-1.9.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.js" />
+    <Content Include="Scripts\jtable\extensions\jquery.jtable.aspnetpagemethods.min.js" />
+    <Content Include="Scripts\jtable\external\json2.js" />
+    <Content Include="Scripts\jtable\external\json2.min.js" />
+    <Content Include="Scripts\jtable\jquery.jtable.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.bd.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.ca.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.cz.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.de.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.es.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.fa.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.fr.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.hr.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.hu.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.id.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.it.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.lt.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.nl-NL.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.no.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.pl.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.pt-BR.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.pt-PT.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.ro.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.ru.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.se.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.tr.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.vi.js" />
+    <Content Include="Scripts\jtable\localization\jquery.jtable.zh-CN.js" />
+    <Content Include="Scripts\jtable\themes\metro\add.png" />
+    <Content Include="Scripts\jtable\themes\metro\close.png" />
+    <Content Include="Scripts\jtable\themes\metro\column-asc.png" />
+    <Content Include="Scripts\jtable\themes\metro\column-desc.png" />
+    <Content Include="Scripts\jtable\themes\metro\column-sortable.png" />
+    <Content Include="Scripts\jtable\themes\metro\delete.png" />
+    <Content Include="Scripts\jtable\themes\metro\edit.png" />
+    <Content Include="Scripts\jtable\themes\metro\jtable_metro_base.css" />
+    <Content Include="Scripts\jtable\themes\metro\jtable_metro_base.min.css" />
+    <Content Include="Scripts\jtable\themes\metro\lightgray\jtable.css" />
+    <Content Include="Scripts\jtable\themes\metro\lightgray\loading.gif" />
+    <Content Include="Scripts\knockout-3.2.0.debug.js" />
+    <Content Include="Scripts\knockout-3.2.0.js" />
+    <Content Include="Scripts\ikeNotify.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
-    <Content Include="Scripts\ViewModels\RegisterPerson.js" />
+    <Content Include="Scripts\ViewModels\Person.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -238,7 +337,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\RegisterPerson\Index.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Shared\Widgets\_DatePicker.cshtml" />
     <Content Include="Scripts\jquery.ext.js" />
   </ItemGroup>
@@ -260,6 +359,12 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup Label="SlowCheetah">
+    <SlowCheetahToolsPath>$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\SlowCheetah.2.5.14\tools\))</SlowCheetahToolsPath>
+    <SlowCheetah_EnableImportFromNuGet Condition=" '$(SlowCheetah_EnableImportFromNuGet)'=='' ">true</SlowCheetah_EnableImportFromNuGet>
+    <SlowCheetah_NuGetImportPath Condition=" '$(SlowCheetah_NuGetImportPath)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\Properties\SlowCheetah\SlowCheetah.Transforms.targets ))</SlowCheetah_NuGetImportPath>
+    <SlowCheetahTargets Condition=" '$(SlowCheetah_EnableImportFromNuGet)'=='true' and Exists('$(SlowCheetah_NuGetImportPath)') ">$(SlowCheetah_NuGetImportPath)</SlowCheetahTargets>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -276,7 +381,7 @@
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>https://localhost</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>https://local.ikemed.com/</IISAppRootUrl>
+          <IISAppRootUrl>https://local.ikemed.ikecode.com/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -293,4 +398,25 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Web\Microsoft.Web.Publishing.Tasks.dll" />
+  <Target Name="AfterCompile" Condition="Exists('IkeCodeLog.$(Configuration).config')">
+    <!--Generate transformed app config in the intermediate directory-->
+    <TransformXml Source="IkeCodeLog.config" Destination="$(IntermediateOutputPath)$(TargetFileName).config" Transform="IkeCodeLog.$(Configuration).config" />
+    <!--Force build process to use the transformed configuration file from now on.-->
+    <ItemGroup>
+      <AppConfigWithTargetPath Remove="IkeCodeLog.config" />
+      <AppConfigWithTargetPath Include="$(IntermediateOutputPath)$(TargetFileName).config">
+        <TargetPath>$(TargetFileName).config</TargetPath>
+      </AppConfigWithTargetPath>
+    </ItemGroup>
+  </Target>
+  <!--Override After Publish to support ClickOnce AfterPublish. Target replaces the untransformed config file copied to the deployment directory with the transformed one.-->
+  <Target Name="AfterPublish">
+    <PropertyGroup>
+      <DeployedConfig>$(_DeploymentApplicationDir)$(TargetName)$(TargetExt).config$(_DeploymentFileMappingExtension)</DeployedConfig>
+    </PropertyGroup>
+    <!--Publish copies the untransformed App.config to deployment directory so overwrite it-->
+    <Copy Condition="Exists('$(DeployedConfig)')" SourceFiles="$(IntermediateOutputPath)$(TargetFileName).config" DestinationFiles="$(DeployedConfig)" />
+  </Target>
+  <Import Project="$(SlowCheetahTargets)" Condition="Exists('$(SlowCheetahTargets)')" Label="SlowCheetah" />
 </Project>

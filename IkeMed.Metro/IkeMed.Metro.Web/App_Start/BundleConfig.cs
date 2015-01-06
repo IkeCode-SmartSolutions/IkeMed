@@ -1,5 +1,8 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Optimization;
+using IkeCode.Core.Mvc;
 
 namespace IkeMed.Metro.Web
 {
@@ -15,10 +18,16 @@ namespace IkeMed.Metro.Web
                     "~/Scripts/jquery.validate.js",
                     "~/Scripts/jquery.validate.unobtrusive.js",
                     "~/Scripts/jquery.unobtrusive-ajax.js",
-                    "~/Scripts/jquery.ext.js"));
+                    "~/Scripts/jquery.ext.js",
+                    "~/Scripts/jquery-ui-1.9.2.min.js",
+                    "~/Scripts/jtable/jquery.jtable.js",
+                    "~/Scripts/jtable/localization/jquery.jtable.pt-BR.js"));
 
             var ikeMedBundle = new ScriptBundle("~/bundles/ikemed");
+            ikeMedBundle.Orderer = new AsDefinedBundleOrderer();
             ikeMedBundle.Include("~/Scripts/common.js");
+            ikeMedBundle.Include("~/Scripts/knockout-3.2.0.js");
+            ikeMedBundle.Include("~/Scripts/ikeNotify.js");
             bundles.Add(ikeMedBundle);
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -34,13 +43,18 @@ namespace IkeMed.Metro.Web
                     "~/js/holder.js",
                     "~/js/metro.docs.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                    "~/css/iconFont.min.css",
-                    "~/css/metro-bootstrap.css",
-                    "~/css/metro-bootstrap-responsive.css",
-                    "~/css/metro-alert.css",
-                    "~/css/metro-alert-theme-*",
-                    "~/css/common.css"));
+            var styleBundle = new StyleBundle("~/Content/css");
+            styleBundle.Orderer = new AsDefinedBundleOrderer();
+            styleBundle.Include("~/css/iconFont.min.css");
+            styleBundle.Include("~/css/metro-bootstrap.css");
+            styleBundle.Include("~/css/metro-bootstrap-responsive.css");
+            styleBundle.Include("~/css/metro-alert.css");
+            styleBundle.Include("~/css/metro-alert-theme-*");
+            styleBundle.Include("~/css/metros-docs.css");
+            styleBundle.Include("~/css/common.css");
+            styleBundle.Include("~/Content/themes/base/jquery-ui.css");
+            styleBundle.Include("~/Scripts/jtable/themes/metro/lightgray/jtable.css");
+            bundles.Add(styleBundle);
         }
     }
 }

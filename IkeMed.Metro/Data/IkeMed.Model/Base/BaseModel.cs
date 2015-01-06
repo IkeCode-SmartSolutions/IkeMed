@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Data.Entity.Migrations.Model;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IkeMed.Model
 {
-    public partial class BaseModel
+    public class BaseModel : IBaseModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,14 +21,25 @@ namespace IkeMed.Model
         public DateTime LastUpdate { get; set; }
 
         [Display(Name = "Ativo")]
+        [DefaultValue(false)]
         public bool IsActive { get; set; }
 
         public BaseModel()
         {
-            this.IsActive = true;
         }
 
         #region Common Methods
+
+        protected virtual void SetEntitiesState(IkeMedContext context)
+        {
+
+        }
+
+
+        public virtual int SaveChanges(IkeMedContext context)
+        {
+            return 0;
+        }
 
         #endregion Common Methods
     }

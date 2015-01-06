@@ -13,17 +13,36 @@ namespace IkeMed.Metro.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            #region Helpers
+
             routes.MapRoute(
-                name: "RegisterPerson",
-                url: "cadastro/pessoa/{personType}/{id}",
-                defaults: new { controller = "RegisterPerson", action = "Index", id = UrlParameter.Optional }
+                name: "Helpers",
+                url: "helpers/{action}",
+                defaults: new { controller = "Helpers" }
+            );
+
+            #endregion Helpers
+
+            #region Person
+
+            routes.MapRoute(
+                name: "Person",
+                url: "cadastro/pessoa/{id}",
+                defaults: new
+                {
+                    controller = "Person",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
             );
 
             routes.MapRoute(
-                name: "Post_RegisterPerson",
+                name: "Post_Person",
                 url: "salvar/pessoa/{id}",
-                defaults: new { controller = "RegisterPerson", action = "Post" }
+                defaults: new { controller = "Person", action = "Post" }
             );
+
+            #endregion Person
 
             routes.MapRoute(
                 name: "Default",

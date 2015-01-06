@@ -1,9 +1,11 @@
 ﻿using IkeMed.Model.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,11 +44,22 @@ namespace IkeMed.Model
         [Required]
         public AddressTypeEnum AddressType { get; set; }
         
+        [JsonIgnore]
         public virtual Person Person { get; set; }
 
         public Address()
             : base()
         {
+        }
+
+        protected override void SetEntitiesState(IkeMedContext context)
+        {
+            if (this != null)
+            {
+                context.Entry(this).State = this.ID > 0 ? EntityState.Modified : EntityState.Added;
+                if (this.Person != null)
+                    context.Entry(this.Person).State = this.Person.ID > 0 ? EntityState.Modified : EntityState.Added;
+            }
         }
     }
 }

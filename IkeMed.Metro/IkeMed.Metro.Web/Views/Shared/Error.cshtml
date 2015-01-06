@@ -1,17 +1,54 @@
-﻿@{
+﻿@model Exception
+@{
     Layout = null;
+    var ex = Model ?? new Exception("Nenhum detalhe, contate o administrador do sistema.");
 }
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
+    <title>Erro!</title>
+    @Styles.Render("~/Content/css")
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet" />
 </head>
-<body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+<body class="metro">
+    <div class="container">
+        <hgroup>
+            <h1>Oops!</h1>
+            <h2>Ocorreu um erro em sua chamada.</h2>
+        </hgroup>
+        @if (ex.Message != null && !string.IsNullOrWhiteSpace(ex.Message))
+        {
+            <div class="bs-callout bs-callout-warning">
+                <h4>Message:</h4>
+                <pre>
+                    @ex.Message
+                </pre>
+            </div>
+        }
+
+        @if (ex.StackTrace != null && !string.IsNullOrWhiteSpace(ex.StackTrace))
+        {
+            <div class="bs-callout bs-callout-danger">
+                <h4>StackTrace:</h4>
+                <pre>
+                    @ex.StackTrace
+                </pre>
+            </div>
+        }
+
+        @if (ex.InnerException != null && !string.IsNullOrWhiteSpace(ex.InnerException.Message))
+        {
+            <div class="bs-callout bs-callout-danger">
+                <h4>Inner Exception:</h4>
+                <p>
+                    <pre>
+                        @ex.InnerException.Message
+                    </pre>
+                </p>
+            </div>
+        }
+    </div>
 </body>
 </html>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,6 @@ namespace IkeMed.Model
 {
     public class LegalPerson : BaseModel
     {
-        [Display(Name = "Tipo de Pessoa")]
-        public PersonTypeEnum PersonType { get; private set; }
-
         [Required]
         [Display(Name = "Nome Fantasia"), MaxLength(250)]
         public string SocialName { get; set; }
@@ -36,7 +34,17 @@ namespace IkeMed.Model
         public LegalPerson()
             : base()
         {
-            this.PersonType = PersonTypeEnum.Legal;
+        }
+
+        protected override void SetEntitiesState(IkeMedContext context)
+        {
+            if (this != null)
+            {
+                context.Entry(this).State = this.ID > 0 ? EntityState.Modified : EntityState.Added;
+                if (this.Person != null)
+                    context.Entry(this.Person).State = this.Person != null && this.Person.ID > 0
+                                                            ? EntityState.Modified : EntityState.Added;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
@@ -14,15 +15,13 @@ namespace IkeMed.Model
 {
     public class NaturalPerson : BaseModel
     {
-        [Display(Name = "Tipo de Pessoa")]
-        public PersonTypeEnum PersonType { get; private set; }
-
         [Display(Name = "Sexo")]
         [Required]
         public GenderEnum Gender { get; set; }
 
         [Display(Name = "Data de Aniversário")]
         [Required, DataType(DataType.Date)]
+        [MinDate("01/01/1930", true)]
         public DateTime Birthdate { get; set; }
 
         [Display(Name = "Imagem de Perfil")]
@@ -38,8 +37,17 @@ namespace IkeMed.Model
         public NaturalPerson()
             : base()
         {
-            this.PersonType = PersonTypeEnum.Natural;
-            this.Birthdate = (DateTime)SqlDateTime.MinValue;
+        }
+
+        protected override void SetEntitiesState(IkeMedContext context)
+        {
+            if (this != null)
+            {
+                context.Entry(this).State = this.ID > 0 ? EntityState.Modified : EntityState.Added;
+                if (this.Person != null)
+                    context.Entry(this.Person).State = this.Person != null && this.Person.ID > 0
+                                                            ? EntityState.Modified : EntityState.Added;
+            }
         }
     }
 }
