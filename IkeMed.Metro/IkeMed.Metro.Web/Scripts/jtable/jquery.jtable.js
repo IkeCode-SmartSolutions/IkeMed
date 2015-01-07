@@ -1727,7 +1727,7 @@ THE SOFTWARE.
             //console.log("_fillDropDownListWithOptions.value", value);
             //console.log("_fillDropDownListWithOptions.typeof value", typeof value)
             $select.empty();
-            var parsedValue = typeof value === 'number' ? value : value.ID;
+            var parsedValue = typeof value === 'number' || value === undefined ? value : value.ID;
             //console.log("_fillDropDownListWithOptions.parsedValue", parsedValue)
 
             for (var i = 0; i < options.length; i++) {

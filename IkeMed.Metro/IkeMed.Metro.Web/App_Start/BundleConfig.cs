@@ -43,7 +43,7 @@ namespace IkeMed.Metro.Web
                     "~/js/holder.js",
                     "~/js/metro.docs.js"));
 
-            var styleBundle = new StyleBundle("~/Content/css");
+            var styleBundle = new StyleBundle("~/Content/styles");
             styleBundle.Orderer = new AsDefinedBundleOrderer();
             styleBundle.Include("~/css/iconFont.min.css");
             styleBundle.Include("~/css/metro-bootstrap.css");

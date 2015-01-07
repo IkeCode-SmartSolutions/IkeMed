@@ -99,9 +99,21 @@ namespace IkeMed.Metro.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateAddress(Address address)
+        public JsonResult PostAddress(Address address)
         {
-            return Json(new { Result = "OK", Record = address }, JsonRequestBehavior.AllowGet);
+            var count = 0;
+            using (var context = this.Context)
+            {
+                if (address.ID == 0)
+                {
+                }
+                context.Addresses.AddOrUpdate(addr => addr.ID, address);
+                count = context.SaveChanges();
+            }
+            if (count > 0)
+                return Json(new { Result = "OK", Record = address }, JsonRequestBehavior.AllowGet);
+            else
+                return Json(new { Result = "ERROR", Message = "Não foi possivel atualizar o registro, por favor tente novamente." }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

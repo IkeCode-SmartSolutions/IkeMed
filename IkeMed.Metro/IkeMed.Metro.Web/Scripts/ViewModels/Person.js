@@ -20,8 +20,8 @@ person.addresses.subscribe(function () {
                     "TotalRecordCount": addressesLength
                 };
             }
-            , createAction: '/Person/CreateAddress'
-            , updateAction: '/Person/UpdateAddress'
+            , createAction: '/Person/PostAddress'
+            , updateAction: '/Person/PostAddress'
             , deleteAction: '/Person/DeleteAddress'
         }
         , fields: {

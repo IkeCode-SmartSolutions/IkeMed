@@ -263,6 +263,7 @@
     <None Include="Properties\PublishProfiles\IkeMed-FileSystem.pubxml" />
     <None Include="Properties\PublishProfiles\IkeMed-GoDaddy.pubxml" />
     <Content Include="Properties\SlowCheetah\SlowCheetah.Transforms.targets" />
+    <None Include="Properties\PublishProfiles\[PROD]-ClinIke.com.br.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
