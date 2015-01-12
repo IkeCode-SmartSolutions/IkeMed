@@ -35,10 +35,9 @@ namespace IkeMed.Model
 
         }
 
-
         public virtual int SaveChanges(IkeMedContext context)
         {
-            return 0;
+            return context.SaveChanges();
         }
 
         #endregion Common Methods

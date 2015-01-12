@@ -13,6 +13,11 @@ namespace IkeMed.Model
         DateTime LastUpdate { get; set; }
         bool IsActive { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context">Current context</param>
+        /// <returns>Returns changed rows count</returns>
         int SaveChanges(IkeMedContext context);
     }
 }

@@ -3,8 +3,13 @@ using IkeMed.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -19,7 +24,7 @@ namespace IkeMed.Metro.Web.Base
         {
             get
             {
-                if (_context == null) 
+                if (_context == null)
                     _context = new IkeMedContext();
                 return _context;
             }
@@ -46,8 +51,6 @@ namespace IkeMed.Metro.Web.Base
 
         protected override void OnResultExecuted(ResultExecutedContext filterContext)
         {
-            if (_context != null)
-                _context.Dispose();
             base.OnResultExecuted(filterContext);
         }
 
@@ -117,6 +120,87 @@ namespace IkeMed.Metro.Web.Base
             finally
             {
                 IkeCodeLog.Default.Metric(methodName, timeElapsed);
+            }
+        }
+
+        public object RunJTableResult<T>(Action action, T obj)
+        {
+            var errorMessage = new StringBuilder();
+            try
+            {
+                action();
+
+                return new { Result = "OK", Record = obj };
+            }
+            catch (DbEntityValidationException e)
+            {
+                var index = 0;
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        var pattern = "{0}";
+                        if (index > 0)
+                            pattern = "<br/> {0}";
+
+                        errorMessage.AppendLine(string.Format(pattern, ve.ErrorMessage));
+
+                        index++;
+                    }
+                }
+
+                return new { Result = "ERROR", Message = errorMessage.ToString() };
+            }
+            catch (DbUpdateException ex)
+            {
+                var sqlException = ex.InnerException.InnerException as SqlException;
+
+                if (sqlException != null && sqlException.Errors.OfType<SqlError>()
+                    .Any(se => se.Number == 2601 || se.Number == 2627 /* PK/UKC violation */))
+                {
+                    return new
+                    {
+                        Result = "ERROR",
+                        Message = @"Já existe um registro com os dados expecificados."
+                    };
+                }
+                else
+                {
+                    return new
+                    {
+                        Result = "ERROR",
+                        Message = sqlException.Message
+                    };
+                }
+            }
+            catch (UpdateException ex)
+            {
+                var sqlException = ex.InnerException as SqlException;
+
+                if (sqlException != null && sqlException.Errors.OfType<SqlError>()
+                    .Any(se => se.Number == 2601 || se.Number == 2627 /* PK/UKC violation */))
+                {
+                    return new
+                    {
+                        Result = "ERROR",
+                        Message = @"Já existe um registro com os dados expecificados."
+                    };
+                }
+                else
+                {
+                    // it's something else...
+                    throw;
+                }
+            }
+            catch (ArgumentException)
+            {
+                return new { Result = "ERROR", Message = @"Ocorreu um erro ao tentar executar a operação.<br/><br/>
+                                                                Se o problema persistir contate o suporte." };
+            }
+            catch (Exception e)
+            {
+                var message = e.InnerException == null || string.IsNullOrWhiteSpace(e.InnerException.Message) ? e.Message : e.InnerException.Message;
+                return new { Result = "ERROR", Message = e.Message };
             }
         }
     }

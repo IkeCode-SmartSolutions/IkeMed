@@ -1,5 +1,6 @@
 ﻿function Person() {
     var self = this;
+    self.ID = 0;
     self.addresses = ko.observableArray();
     self.phones = ko.observableArray();
     self.documents = ko.observableArray();
@@ -20,8 +21,23 @@ person.addresses.subscribe(function () {
                     "TotalRecordCount": addressesLength
                 };
             }
-            , createAction: '/Person/PostAddress'
-            , updateAction: '/Person/PostAddress'
+            , createAction: function (postData) {
+                return $.Deferred(function ($dfd) {
+                    $.ajax({
+                        url: '/Person/PostAddress?personId=' + person.ID,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: postData,
+                        success: function (data) {
+                            $dfd.resolve(data);
+                        },
+                        error: function () {
+                            $dfd.reject();
+                        }
+                    });
+                });
+            }
+            , updateAction: '/Person/PostAddress?personId=' + person.ID
             , deleteAction: '/Person/DeleteAddress'
         }
         , fields: {
@@ -75,7 +91,7 @@ person.phones.subscribe(function () {
     //console.log('person.addresses()', person.addresses());
     var phonesLength = person.phones().length;
     $('#phonesContainer').jtable({
-        title: 'Endereços'
+        title: 'Telefones'
         , actions: {
             listAction: function (postData, jtParams) {
                 return {
@@ -84,8 +100,23 @@ person.phones.subscribe(function () {
                     "TotalRecordCount": phonesLength
                 };
             }
-            , createAction: '/Person/CreatePhone'
-            , updateAction: '/Person/UpdatePhone'
+            , createAction: function (postData) {
+                return $.Deferred(function ($dfd) {
+                    $.ajax({
+                        url: '/Person/PostPhone?personId=' + person.ID,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: postData,
+                        success: function (data) {
+                            $dfd.resolve(data);
+                        },
+                        error: function () {
+                            $dfd.reject();
+                        }
+                    });
+                });
+            }
+            , updateAction: '/Person/PostPhone?personId=' + person.ID
             , deleteAction: '/Person/DeletePhone'
         }
         , fields: {
@@ -121,7 +152,7 @@ person.documents.subscribe(function () {
     //console.log('person.documents()', person.documents());
     var documentsLength = person.documents().length;
     $('#documentsContainer').jtable({
-        title: 'Endereços'
+        title: 'Documentos'
         , actions: {
             listAction: function (postData, jtParams) {
                 return {
@@ -130,8 +161,23 @@ person.documents.subscribe(function () {
                     "TotalRecordCount": documentsLength
                 };
             }
-            , createAction: '/Person/CreateDocument'
-            , updateAction: '/Person/UpdateDocument'
+            , createAction: function (postData) {
+                return $.Deferred(function ($dfd) {
+                    $.ajax({
+                        url: '/Person/PostDocument?personId=' + person.ID,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: postData,
+                        success: function (data) {
+                            $dfd.resolve(data);
+                        },
+                        error: function () {
+                            $dfd.reject();
+                        }
+                    });
+                });
+            }
+            , updateAction: '/Person/PostDocument?personId=' + person.ID
             , deleteAction: '/Person/DeleteDocument'
         }
         , fields: {

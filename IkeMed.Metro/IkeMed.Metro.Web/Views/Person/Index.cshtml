@@ -200,6 +200,7 @@
 @section scripts{
     <script type="text/javascript" src="~/Scripts/ViewModels/Person.js"></script>
     <script type="text/javascript">
+        person.ID = @Model.Person.ID;
         person.addresses(@Html.Raw(Model.Person.Addresses.Serialize()));
         person.phones(@Html.Raw(Model.Person.Phones.Serialize()));
         person.documents(@Html.Raw(Model.Person.Documents.Serialize()));

@@ -6,7 +6,7 @@
             //fix to input file validation
             $.validator.addMethod('accept', function () { return true; });
         });
-    }
+    };
 }
 
 var common = new Common();

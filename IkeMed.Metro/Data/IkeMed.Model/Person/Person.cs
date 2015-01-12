@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Data.Entity.Migrations;
 
 namespace IkeMed.Model
 {
@@ -97,12 +98,41 @@ namespace IkeMed.Model
                 if (this.NaturalPerson != null)
                     context.Entry(this.NaturalPerson).State = this.NaturalPerson.ID > 0 ? EntityState.Modified : EntityState.Added;
             }
+
+            base.SetEntitiesState(context);
+        }
+
+        protected void SetEntitiesState(IkeMedContext context, Person person)
+        {
+            if (person != null)
+            {
+                var personEntry = context.Entry(person);
+                if (personEntry.State == EntityState.Detached)
+                    context.People.Attach(person);
+
+                context.Entry(person).State = person.ID > 0 ? EntityState.Modified : EntityState.Added;
+                if (person.Doctor != null)
+                    context.Entry(person.Doctor).State = person.Doctor.ID > 0 ? EntityState.Modified : EntityState.Added;
+                if (person.LegalPerson != null)
+                    context.Entry(person.LegalPerson).State = person.LegalPerson.ID > 0 ? EntityState.Modified : EntityState.Added;
+                if (person.NaturalPerson != null)
+                    context.Entry(person.NaturalPerson).State = person.NaturalPerson.ID > 0 ? EntityState.Modified : EntityState.Added;
+            }
+
+            base.SetEntitiesState(context);
         }
 
         public override int SaveChanges(IkeMedContext context)
         {
             this.SetEntitiesState(context);
             this.SaveImages();
+
+            return base.SaveChanges(context);
+        }
+
+        public int SaveChanges(IkeMedContext context, Person person)
+        {
+            this.SetEntitiesState(context, person);
 
             return context.SaveChanges();
         }

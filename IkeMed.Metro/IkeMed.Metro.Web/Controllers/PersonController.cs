@@ -75,9 +75,19 @@ namespace IkeMed.Metro.Web.Controllers
                 this.Run(string.Format("PersonController.Post(id={0})", person.ID),
                     () =>
                     {
-                        using (var context = new IkeMedContext())
+                        using (var context = this.Context)
                         {
-                            person.SaveChanges(context);
+                            if (person.ID > 0)
+                            {
+                                context.People.AddOrUpdate(i => i.ID, person);
+                                context.SaveChanges();
+                            }
+                            else
+                            {
+                                context.People.Add(person);
+                                person.SaveChanges(context, person);
+                            }
+                            //vm.Person = person;
                             vm.Person = context.People
                                             .Where(i => i.ID == person.ID)
                                             .Include(i => i.NaturalPerson)
@@ -99,71 +109,167 @@ namespace IkeMed.Metro.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult PostAddress(Address address)
+        public JsonResult PostAddress(Address address, int personId)
         {
-            var count = 0;
-            using (var context = this.Context)
+            if (address.ID <= 0 && personId <= 0)
             {
-                if (address.ID == 0)
-                {
-                }
-                context.Addresses.AddOrUpdate(addr => addr.ID, address);
-                count = context.SaveChanges();
+                throw new ArgumentException("Parameter -> personId is required");
             }
-            if (count > 0)
-                return Json(new { Result = "OK", Record = address }, JsonRequestBehavior.AllowGet);
-            else
-                return Json(new { Result = "ERROR", Message = "Não foi possivel atualizar o registro, por favor tente novamente." }, JsonRequestBehavior.AllowGet);
-        }
 
-        [HttpPost]
-        public JsonResult CreateAddress(Address address)
-        {
-            return Json(new { Result = "OK", Record = address }, JsonRequestBehavior.AllowGet);
+            return Json(
+                base.RunJTableResult<Address>(() =>
+            {
+                using (var context = this.Context)
+                {
+                    if (address.ID > 0)
+                    {
+                        context.Addresses.AddOrUpdate(i => i.ID, address);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        var person = context.People.Where(p => p.ID == personId).FirstOrDefault();
+                        if (person != null)
+                        {
+                            person.Addresses.Add(address);
+                        }
+
+                        context.SaveChanges();
+                        //Remove circular reference
+                        address.Person = null;
+                    }
+                }
+            }, address)
+            , JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteAddress(int id)
         {
-            return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+            return Json(
+                base.RunJTableResult<Address>(() =>
+                {
+                    if (id <= 0)
+                        throw new ArgumentException("Parameter -> id[Address.ID] is required");
+
+                    using (var context = this.Context)
+                    {
+                        var addr = context.Addresses.FirstOrDefault(i => i.ID == id);
+                        context.Entry(addr).State = EntityState.Deleted;
+                        context.SaveChanges();
+                    }
+                }, null)
+            , JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult UpdatePhone(Phone phone)
+        public JsonResult PostPhone(Phone phone, int personId)
         {
-            return Json(new { Result = "OK", Record = phone }, JsonRequestBehavior.AllowGet);
-        }
+            return Json(
+                base.RunJTableResult<Phone>(() =>
+                {
+                    if (phone.ID <= 0 && personId <= 0)
+                    {
+                        throw new ArgumentException("Parameter -> personId is required");
+                    }
 
-        [HttpPost]
-        public JsonResult CreatePhone(Phone phone)
-        {
-            return Json(new { Result = "OK", Record = phone }, JsonRequestBehavior.AllowGet);
+                    using (var context = this.Context)
+                    {
+                        if (phone.ID > 0)
+                        {
+                            context.Phones.AddOrUpdate(i => i.ID, phone);
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            var person = context.People.Where(p => p.ID == personId).FirstOrDefault();
+                            if (person != null)
+                            {
+                                person.Phones.Add(phone);
+                            }
+
+                            context.SaveChanges();
+                            //Remove circular reference
+                            phone.Person = null;
+                        }
+                    }
+                }, phone),
+            JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeletePhone(int id)
         {
-            return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+            return Json(
+                base.RunJTableResult<Phone>(() =>
+                {
+                    if (id <= 0)
+                        throw new ArgumentException("Parameter -> id[Phone.ID] is required");
+
+                    using (var context = this.Context)
+                    {
+                        var phone = context.Phones.FirstOrDefault(i => i.ID == id);
+                        context.Entry(phone).State = EntityState.Deleted;
+                        context.SaveChanges();
+                    }
+                }, null)
+        , JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult UpdateDocument(Document document)
+        public JsonResult PostDocument(Document document, int personId)
         {
-            return Json(new { Result = "OK", Record = document }, JsonRequestBehavior.AllowGet);
-        }
+            return Json(
+                base.RunJTableResult<Document>(() =>
+                {
+                    if (document.ID <= 0 && personId <= 0)
+                    {
+                        throw new ArgumentException("Parameter -> personId is required");
+                    }
 
-        [HttpPost]
-        public JsonResult CreateDocument(Document document)
-        {
-            return Json(new { Result = "OK", Record = document }, JsonRequestBehavior.AllowGet);
+                    using (var context = this.Context)
+                    {
+                        if (document.ID > 0)
+                        {
+                            context.Documents.AddOrUpdate(i => i.ID, document);
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            var person = context.People.Where(p => p.ID == personId).FirstOrDefault();
+                            if (person != null)
+                            {
+                                person.Documents.Add(document);
+                            }
+
+                            context.SaveChanges();
+                            //Remove circular reference
+                            document.Person = null;
+                        }
+                    }
+                }, document)
+            , JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteDocument(int id)
         {
-            return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+            return Json(
+                base.RunJTableResult<Document>(() =>
+                {
+                    if (id <= 0)
+                        throw new ArgumentException("Parameter -> id[Document.ID] is required");
+
+                    using (var context = this.Context)
+                    {
+                        var addr = context.Addresses.FirstOrDefault(i => i.ID == id);
+                        context.Entry(addr).State = EntityState.Deleted;
+                        context.SaveChanges();
+                    }
+                }, null)
+            , JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetDocumentTypes()
         {
-            using (var context = new IkeMedContext())
+            using (var context = base.Context)
             {
                 var docTypes = context.DocumentTypes.ToList();
                 var result = new Dictionary<string, object>(docTypes.Count);
@@ -171,7 +277,7 @@ namespace IkeMed.Metro.Web.Controllers
                 {
                     result.Add(doc.Name, doc.ID);
                 }
-                
+
                 return Json(new { Result = "OK", Options = JTableOptionModel.GetModelList(result) }, JsonRequestBehavior.AllowGet);
             }
         }
